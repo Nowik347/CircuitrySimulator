@@ -1,0 +1,231 @@
+﻿<Window x:Class="CircuitrySimulator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CircuitrySimulator"
+        mc:Ignorable="d"
+        
+        WindowStartupLocation="CenterScreen"
+        Title="Zircuitry Simulator" 
+        
+        Width="1920" 
+        Height="1080"
+        
+        WindowState="Maximized" 
+        
+        KeyDown="Window_KeyDown" 
+        MouseRightButtonDown="Window_MouseRightButtonDown">
+    
+    <Grid Background="LightGray">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        
+        <!--Панель инструментов-->
+        <StackPanel Grid.Row="0" Panel.ZIndex="1">
+            <!--Меню-->
+            <Menu>
+                <MenuItem Header="File"/>
+                <MenuItem Header="Edit"/>
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                <MenuItem Header="Options"/>
+                <MenuItem Header="About"/>
+            </Menu>
+
+            <!--Панель инструментов-->
+            <ToolBarTray Orientation="Horizontal">
+                <ToolBar Name="MainToolbar">
+                    <Button Name="NewFileButton">
+                        <Image Source="/Images/Main Items/new_file.png" Height="25"/>
+                    </Button>
+
+                    <Button Name="LoadFromFileButton">
+                        <Image Source="/Images/Main Items/from_file.png" Height="25"/>
+                    </Button>
+
+                    <Button Name="SaveButton">
+                        <Image Source="/Images/Main Items/save.png" Height="25"/>
+                    </Button>
+
+                    <Button Name="SaveAsButton">
+                        <Image Source="/Images/Main Items/save_as.png" Height="25"/>
+                    </Button>
+                </ToolBar>
+
+                <ToolBar Name="EditingToolbar">
+                    <ToggleButton>
+                        <Image Source="/Images/Editing/selection.png" Height="25"/>
+                    </ToggleButton>
+
+                    <ToggleButton>
+                        <Image Source="/Images/Editing/delete.png" Height="25"/>
+                    </ToggleButton>
+
+                    <ToggleButton>
+                        <Image Source="/Images/Editing/wire.png" Height="25"/>
+                    </ToggleButton>
+                </ToolBar>
+
+                <ToolBar Name="SimulationToolbar">
+                    <ToggleButton>
+                        <Image Source="../Images/Simulation/image.png" Height="25"/>
+                    </ToggleButton>
+                </ToolBar>
+            </ToolBarTray>
+        </StackPanel>
+        
+        <!--Центральное поле-->
+        <DockPanel Grid.Row="1" LastChildFill="True">
+            <!--Панель элементов-->
+            <StackPanel Background="WhiteSmoke"
+                        Width="220" 
+                        DockPanel.Dock="Left" 
+                        Panel.ZIndex="1">
+                
+                <Label Content="Компоненты"/>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Margin="3" Grid.Row="0" Grid.Column="0">
+                        <Button Name="TransistorButton"
+                                Click="SetState_FromButton">
+                            <Image Source="../Images/Components/transistor.png" Height="65"/>
+                        </Button>
+
+                        <TextBlock Text="Транзистор" 
+                                   TextWrapping="WrapWithOverflow"
+                                   FontSize="12"
+                                   Width="65"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="3" Grid.Row="0" Grid.Column="1">
+                        <Button Name="InverterButton"
+                                Click="SetState_FromButton">
+                            <Image Source="/Images/Components/inverter.png" Height="65"/>
+                        </Button>
+
+                        <TextBlock Text="Логическое НЕ" 
+                                   TextWrapping="WrapWithOverflow"
+                                   FontSize="12"
+                                   Width="65"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <StackPanel Margin="3" Grid.Row="0" Grid.Column="2">
+                        <Button Name="ANDButton"
+                                Click="SetState_FromButton">
+                            <Image Source="/Images/Components/AND.png" Height="65"/>
+                        </Button>
+
+                        <TextBlock Text="Логическое И" 
+                                   TextWrapping="WrapWithOverflow"
+                                   FontSize="12"
+                                   Width="65"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="3" Grid.Row="1" Grid.Column="0">
+                        <Button Name="ORButton"
+                                Click="SetState_FromButton">
+                            <Image Source="/Images/Components/OR.png" Height="65"/>
+                        </Button>
+
+                        <TextBlock Text="Логическое ИЛИ" 
+                                   TextWrapping="WrapWithOverflow"
+                                   FontSize="12"
+                                   Width="65"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="3" Grid.Row="1" Grid.Column="1">
+                        <Button Name="NANDButton"
+                                Click="SetState_FromButton">
+                            <Image Source="/Images/Components/NAND.png" Height="65"/>
+                        </Button>
+
+                        <TextBlock Text="Логическое И-НЕ" 
+                                   TextWrapping="WrapWithOverflow"
+                                   FontSize="12"
+                                   Width="65"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="3" Grid.Row="1" Grid.Column="2">
+                        <Button Name="NORButton"
+                                Click="SetState_FromButton">
+                            <Image Source="/Images/Components/NOR.png" Height="65"/>
+                        </Button>
+
+                        <TextBlock Text="Логическое ИЛИ-НЕ" 
+                                   TextWrapping="WrapWithOverflow"
+                                   FontSize="12"
+                                   Width="65"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <!--Панель настроек-->
+            <DockPanel Name="PropertiesPanel"
+                       Background="WhiteSmoke"
+                       DockPanel.Dock="Right"
+                       Visibility="Collapsed"
+                       Panel.ZIndex="1">
+                
+                <Label Content="Свойства" DockPanel.Dock="Top"/>
+
+                <StackPanel DockPanel.Dock="Left">
+                    <Label Content="ID"/>
+                    <Label Content="Имя"/>
+                    <Label Content="Цвет"/>
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Right">
+                    <TextBox Margin="0 0 0 11" Width="150"></TextBox>
+                    <TextBox Margin="0 0 0 11" Width="150"></TextBox>
+                    <TextBox Margin="0 0 0 11" Width="150"></TextBox>
+                </StackPanel>
+            </DockPanel>
+
+            <!--Область рисования-->
+            <Canvas Name="DrawingBoard"
+                    Background="White" 
+                    Margin="5"
+                    MouseMove="DrawingBoard_MouseMove" 
+                    MouseLeftButtonDown="DrawingBoard_MouseLeftButtonDown"
+                    MouseEnter="DrawingBoard_MouseEnter"
+                    MouseLeave="DrawingBoard_MouseLeave"/>
+        </DockPanel>
+
+        <StackPanel Grid.Row="2" 
+                    Background="White" 
+                    Orientation="Horizontal" 
+                    Panel.ZIndex="1">
+            
+            <Label Name="StatusLabel" 
+                   Content="Строка статуса"
+                   FontSize="10" 
+                   Grid.Row="2"/>
+            
+            <Label Name="PositionLabel" 
+                   Content="0,0" 
+                   FontSize="10"/>
+        </StackPanel>
+    </Grid>
+</Window>
