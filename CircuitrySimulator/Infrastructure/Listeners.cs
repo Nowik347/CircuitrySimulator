@@ -1,22 +1,13 @@
 ﻿using CircuitrySimulator.Classes;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace CircuitrySimulator
 {
     public partial class MainWindow : Window
     {
-        private void clearState()
-        {
-            currentState = State.Selection;
-
-            StatusLabel.Content = StatusLabelStates[(int)currentState];
-        }
-
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             switch(e.Key)
@@ -25,14 +16,23 @@ namespace CircuitrySimulator
                     PropertiesPanel.Visibility = PropertiesPanel.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
                     break;
                 case Key.R:
-                    if (currentState != State.Selection)
+                    rotationAngle += 90;
+
+                    PreviewImage? previewImage = DrawingBoard.Children.OfType<PreviewImage>().FirstOrDefault();
+
+                    if (previewImage != null)
+                        previewImage.RenderTransform = new RotateTransform(rotationAngle);
+                    break;
+                case Key.Delete:
+                    if (currentSelectedObject != null)
                     {
-                        rotationAngle += 90;
-
-                        Image previewImage = DrawingBoard.Children.OfType<PreviewImage>().FirstOrDefault();
-
-                        if (previewImage != null) 
-                            previewImage.RenderTransform = new RotateTransform(rotationAngle);
+                        currentSelectedObject.DeleteChildren();
+                        DeleteObject(currentSelectedObject);
+                    }
+                    else
+                    {
+                        DeleteToggleButton.IsChecked = true;
+                        DeleteToggleButton_Checked(sender, e);
                     }
                     break;
                 default:
@@ -42,44 +42,14 @@ namespace CircuitrySimulator
 
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (currentState != State.Selection)
+            if (currentState == "Placement")
                 DrawingBoard.Children.Remove(DrawingBoard.Children.OfType<PreviewImage>().FirstOrDefault());
 
-            clearState();
+            ClearState();
 
             FocusManager.SetFocusedElement(this, null);
 
             Keyboard.ClearFocus();
-        }
-
-        public Rectangle Draw_Selection_Frame(double x, double y)
-        {
-            Rectangle selectionFrame = new Rectangle
-            {
-                Width = 100,
-                Height = 100,
-                Fill = null,
-                StrokeThickness = 2,
-                Stroke = Brushes.Black,
-                StrokeDashArray = new DoubleCollection() { 4, 1 }
-            };
-
-            Canvas.SetLeft(selectionFrame, x);
-            Canvas.SetTop(selectionFrame, y);
-
-            DrawingBoard.Children.Add(selectionFrame);
-
-            currentState = State.Transistor;
-
-            StatusLabel.Content = StatusLabelStates[(int)currentState];
-
-            return selectionFrame;
-        }
-
-        public void Remove_Selection_Frame(Rectangle? selectionFrame)
-        {
-            DrawingBoard.Children.Remove(selectionFrame);
-            clearState();
         }
     }
 }

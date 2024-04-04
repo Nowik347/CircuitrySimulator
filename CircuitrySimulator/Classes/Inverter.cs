@@ -5,11 +5,11 @@ using System.Windows;
 
 namespace CircuitrySimulator.Classes
 {
-    class Transistor : BaseComponent
+    class Inverter : BaseComponent
     {
-        public Transistor(double rotationAngle) 
+        public Inverter(double rotationAngle)
         {
-            Source = new BitmapImage(new Uri("../Images/Components/transistor.png", UriKind.Relative));
+            Source = new BitmapImage(new Uri("../Images/Components/inverter.png", UriKind.Relative));
             Width = 100;
             Height = 100;
             RenderTransform = new RotateTransform(rotationAngle);

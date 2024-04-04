@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using CircuitrySimulator.Classes;
+using System.Security.RightsManagement;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace CircuitrySimulator
 {
@@ -8,10 +12,6 @@ namespace CircuitrySimulator
     /// </summary>
     public partial class MainWindow : Window
     {
-        enum State { Selection, Transistor }
-        readonly string []StatusLabelStates = { "", "Транзистор" };
-        readonly string []PreviewImagesSources = { "", "../Images/transistor.png" };
-
         private int _rotationAngle;
 
         public int rotationAngle 
@@ -21,29 +21,110 @@ namespace CircuitrySimulator
             set { _rotationAngle = _rotationAngle == 360 ? 90 : value; }
         }
 
-        State currentState;
+        public string currentState, newElementName;
+        public BaseComponent? currentSelectedObject;
+
+        private uint totalComponentCount = 0;
+        private bool drawPreviewImage;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            currentState = State.Selection;
-            StatusLabel.Content = StatusLabelStates[(int)currentState];
+            ClearState();
         }
 
         private void SetState_FromButton(object sender, RoutedEventArgs e)
         {
-            switch(((Button)sender).Name)
+            string senderName = ((Button)sender).Name.ToString().Trim();
+
+            newElementName = senderName.Remove(senderName.Length - 6);
+
+            currentState = "Placement";
+
+            UpdateStatusLabel();
+
+            SelectionToggleButton.IsChecked = false;
+            DeleteToggleButton.IsChecked = false;
+            WiringToggleButton.IsChecked = false;
+
+            drawPreviewImage = true;
+        }
+
+        private void ClearState(object? sender = null, RoutedEventArgs? e = null)
+        {
+            currentState = "Selection";
+
+            SelectionToggleButton.IsChecked = true;
+
+            DeleteToggleButton.IsChecked = false;
+            WiringToggleButton.IsChecked = false;
+            drawPreviewImage = false;
+
+            UpdateStatusLabel();
+        }
+
+        public void UpdateStatusLabel()
+        {
+            StatusLabel.Content = currentState;
+        }
+
+        public Rectangle Draw_Selection_Frame(double x, double y)
+        {
+            Rectangle selectionFrame = new Rectangle
             {
-                case "TransistorButton":
-                    currentState = currentState == State.Selection ? State.Transistor : State.Selection;
-                    break;
-                default:
-                    currentState = State.Selection;
-                    break;
+                Width = 100,
+                Height = 100,
+                Fill = null,
+                StrokeThickness = 2,
+                Stroke = Brushes.Black,
+                StrokeDashArray = new DoubleCollection() { 4, 1 }
+            };
+
+            Canvas.SetLeft(selectionFrame, x);
+            Canvas.SetTop(selectionFrame, y);
+
+            DrawingBoard.Children.Add(selectionFrame);
+
+            return selectionFrame;
+        }
+
+        public void Remove_Selection_Frame(Rectangle? selectionFrame)
+        {
+            DrawingBoard.Children.Remove(selectionFrame);
+            ClearState();
+        }
+
+        private void DeleteToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (currentState == "Deletion")
+            {
+                ClearState();
+                return;
             }
 
-            StatusLabel.Content = StatusLabelStates[(int)currentState];
+            SelectionToggleButton.IsChecked = false;
+            WiringToggleButton.IsChecked = false;
+            drawPreviewImage = false;
+
+            currentState = "Deletion";
+            UpdateStatusLabel();
+        }
+
+        private void WiringToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (currentState == "Wiring")
+            {
+                ClearState();
+                return;
+            }
+
+            SelectionToggleButton.IsChecked = false;
+            DeleteToggleButton.IsChecked = false;
+            drawPreviewImage = false;
+
+            currentState = "Wiring";
+            UpdateStatusLabel();
         }
     }
 }

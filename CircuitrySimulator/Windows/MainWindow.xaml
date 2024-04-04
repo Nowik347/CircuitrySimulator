@@ -1,4 +1,4 @@
-﻿<Window x:Class="CircuitrySimulator.MainWindow"
+﻿<Window x:Name="window" x:Class="CircuitrySimulator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -16,15 +16,15 @@
         
         KeyDown="Window_KeyDown" 
         MouseRightButtonDown="Window_MouseRightButtonDown">
-    
+
     <Grid Background="LightGray">
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="55"/>
             <RowDefinition Height="20*"/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
-        
+
         <!--Панель инструментов-->
         <StackPanel Grid.Row="0" Panel.ZIndex="1">
             <!--Меню-->
@@ -57,15 +57,15 @@
                 </ToolBar>
 
                 <ToolBar Name="EditingToolbar">
-                    <ToggleButton>
+                    <ToggleButton Name="SelectionToggleButton" Click="ClearState">
                         <Image Source="/Images/Editing/selection.png" Height="25"/>
                     </ToggleButton>
 
-                    <ToggleButton>
+                    <ToggleButton Name="DeleteToggleButton" Click="DeleteToggleButton_Checked">
                         <Image Source="/Images/Editing/delete.png" Height="25"/>
                     </ToggleButton>
 
-                    <ToggleButton>
+                    <ToggleButton Name="WiringToggleButton" Click="WiringToggleButton_Checked">
                         <Image Source="/Images/Editing/wire.png" Height="25"/>
                     </ToggleButton>
                 </ToolBar>
@@ -77,7 +77,7 @@
                 </ToolBar>
             </ToolBarTray>
         </StackPanel>
-        
+
         <!--Центральное поле-->
         <DockPanel Grid.Row="1" LastChildFill="True">
             <!--Панель элементов-->
@@ -85,100 +85,112 @@
                         Width="220" 
                         DockPanel.Dock="Left" 
                         Panel.ZIndex="1">
+
+                <Label Content="Панель элементов"/>
                 
-                <Label Content="Компоненты"/>
+                <Expander Header="Основные компоненты">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
+                        <StackPanel Margin="3" Grid.Row="0" Grid.Column="0">
+                            <Button Name="TransistorButton" Click="SetState_FromButton">
+                                <Image Source="../Images/Components/transistor.png" Height="65"/>
+                            </Button>
 
-                    <StackPanel Margin="3" Grid.Row="0" Grid.Column="0">
-                        <Button Name="TransistorButton"
-                                Click="SetState_FromButton">
-                            <Image Source="../Images/Components/transistor.png" Height="65"/>
-                        </Button>
+                            <TextBlock Text="Транзистор" 
+                                       TextWrapping="WrapWithOverflow"
+                                       FontSize="12"
+                                       Width="65"
+                                       TextAlignment="Center"/>
+                        </StackPanel>
 
-                        <TextBlock Text="Транзистор" 
-                                   TextWrapping="WrapWithOverflow"
-                                   FontSize="12"
-                                   Width="65"
-                                   TextAlignment="Center"/>
-                    </StackPanel>
+                        <StackPanel Margin="3" Grid.Row="0" Grid.Column="1">
+                            <Button Name="InverterButton" Click="SetState_FromButton">
+                                <Image Source="/Images/Components/inverter.png" Height="65"/>
+                            </Button>
 
-                    <StackPanel Margin="3" Grid.Row="0" Grid.Column="1">
-                        <Button Name="InverterButton"
-                                Click="SetState_FromButton">
-                            <Image Source="/Images/Components/inverter.png" Height="65"/>
-                        </Button>
+                            <TextBlock Text="Логическое НЕ" 
+                                       TextWrapping="WrapWithOverflow"
+                                       FontSize="12"
+                                       Width="65"
+                                       TextAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </Expander>
 
-                        <TextBlock Text="Логическое НЕ" 
-                                   TextWrapping="WrapWithOverflow"
-                                   FontSize="12"
-                                   Width="65"
-                                   TextAlignment="Center"/>
-                    </StackPanel>
-                    
-                    <StackPanel Margin="3" Grid.Row="0" Grid.Column="2">
-                        <Button Name="ANDButton"
-                                Click="SetState_FromButton">
-                            <Image Source="/Images/Components/AND.png" Height="65"/>
-                        </Button>
+                <Expander Header="Логические компоненты">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-                        <TextBlock Text="Логическое И" 
-                                   TextWrapping="WrapWithOverflow"
-                                   FontSize="12"
-                                   Width="65"
-                                   TextAlignment="Center"/>
-                    </StackPanel>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
 
-                    <StackPanel Margin="3" Grid.Row="1" Grid.Column="0">
-                        <Button Name="ORButton"
-                                Click="SetState_FromButton">
-                            <Image Source="/Images/Components/OR.png" Height="65"/>
-                        </Button>
+                        <StackPanel Margin="3" Grid.Row="0" Grid.Column="0">
+                            <Button Name="ANDButton" Click="SetState_FromButton">
+                                <Image Source="/Images/Components/AND.png" Height="65"/>
+                            </Button>
 
-                        <TextBlock Text="Логическое ИЛИ" 
-                                   TextWrapping="WrapWithOverflow"
-                                   FontSize="12"
-                                   Width="65"
-                                   TextAlignment="Center"/>
-                    </StackPanel>
+                            <TextBlock Text="Логическое И" 
+                                       TextWrapping="WrapWithOverflow"
+                                       FontSize="12"
+                                       Width="65"
+                                       TextAlignment="Center"/>
+                        </StackPanel>
 
-                    <StackPanel Margin="3" Grid.Row="1" Grid.Column="1">
-                        <Button Name="NANDButton"
-                                Click="SetState_FromButton">
-                            <Image Source="/Images/Components/NAND.png" Height="65"/>
-                        </Button>
+                        <StackPanel Margin="3" Grid.Row="0" Grid.Column="1">
+                            <Button Name="ORButton" Click="SetState_FromButton">
+                                <Image Source="/Images/Components/OR.png" Height="65"/>
+                            </Button>
 
-                        <TextBlock Text="Логическое И-НЕ" 
-                                   TextWrapping="WrapWithOverflow"
-                                   FontSize="12"
-                                   Width="65"
-                                   TextAlignment="Center"/>
-                    </StackPanel>
+                            <TextBlock Text="Логическое ИЛИ" 
+                                       TextWrapping="WrapWithOverflow"
+                                       FontSize="12"
+                                       Width="65"
+                                       TextAlignment="Center"/>
+                        </StackPanel>
 
-                    <StackPanel Margin="3" Grid.Row="1" Grid.Column="2">
-                        <Button Name="NORButton"
-                                Click="SetState_FromButton">
-                            <Image Source="/Images/Components/NOR.png" Height="65"/>
-                        </Button>
+                        <StackPanel Margin="3" Grid.Row="0" Grid.Column="2">
+                            <Button Name="NANDButton" Click="SetState_FromButton">
+                                <Image Source="/Images/Components/NAND.png" Height="65"/>
+                            </Button>
 
-                        <TextBlock Text="Логическое ИЛИ-НЕ" 
-                                   TextWrapping="WrapWithOverflow"
-                                   FontSize="12"
-                                   Width="65"
-                                   TextAlignment="Center"/>
-                    </StackPanel>
-                </Grid>
+                            <TextBlock Text="Логическое И-НЕ" 
+                                       TextWrapping="WrapWithOverflow"
+                                       FontSize="12"
+                                       Width="65"
+                                       TextAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="3" Grid.Row="1" Grid.Column="0">
+                            <Button Name="NORButton" Click="SetState_FromButton">
+                                <Image Source="/Images/Components/NOR.png" Height="65"/>
+                            </Button>
+
+                            <TextBlock Text="Логическое ИЛИ-НЕ" 
+                                       TextWrapping="WrapWithOverflow"
+                                       FontSize="12"
+                                       Width="65"
+                                       TextAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </Expander>
             </StackPanel>
 
             <!--Панель настроек-->
@@ -187,7 +199,7 @@
                        DockPanel.Dock="Right"
                        Visibility="Collapsed"
                        Panel.ZIndex="1">
-                
+
                 <Label Content="Свойства" DockPanel.Dock="Top"/>
 
                 <StackPanel DockPanel.Dock="Left">
@@ -217,15 +229,15 @@
                     Background="White" 
                     Orientation="Horizontal" 
                     Panel.ZIndex="1">
-            
+
             <Label Name="StatusLabel" 
-                   Content="Строка статуса"
-                   FontSize="10" 
+                   Content="{Binding currentState, ElementName=window}"
+                   FontSize="12" 
                    Grid.Row="2"/>
-            
+
             <Label Name="PositionLabel" 
                    Content="0,0" 
-                   FontSize="10"/>
+                   FontSize="12"/>
         </StackPanel>
     </Grid>
 </Window>
