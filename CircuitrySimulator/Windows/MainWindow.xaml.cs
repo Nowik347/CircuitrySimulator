@@ -12,20 +12,7 @@ namespace CircuitrySimulator
     /// </summary>
     public partial class MainWindow : Window
     {
-        private int _rotationAngle;
-
-        public int rotationAngle 
-        {
-            get { return _rotationAngle; }
-
-            set { _rotationAngle = _rotationAngle == 360 ? 90 : value; }
-        }
-
-        public string currentState, newElementName;
-        public BaseComponent? currentSelectedObject;
-
-        private uint totalComponentCount = 0;
-        private bool drawPreviewImage;
+        public string currentState;
 
         public MainWindow()
         {

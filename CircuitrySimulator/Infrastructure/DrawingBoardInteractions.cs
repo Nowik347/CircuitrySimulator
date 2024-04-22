@@ -11,6 +11,21 @@ namespace CircuitrySimulator
 {
     public partial class MainWindow : Window
     {
+        private int _rotationAngle;
+
+        public int rotationAngle
+        {
+            get { return _rotationAngle; }
+
+            set { _rotationAngle = _rotationAngle == 360 ? 90 : value; }
+        }
+
+        public string newElementName;
+        public BaseComponent? currentSelectedObject;
+
+        private uint totalComponentCount = 0;
+        private bool drawPreviewImage;
+
         private void DrawingBoard_MouseEnter(object sender, MouseEventArgs e)
         {
             if (drawPreviewImage)
@@ -43,7 +58,10 @@ namespace CircuitrySimulator
         private void DrawingBoard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (currentState == "Placement")
-                PlaceObject(e);             
+                PlaceObject(e);
+
+            //if (currentState == "Wiring")
+            //    PlaceWire(e);
         }
 
         private void DrawingBoard_MouseMove(object sender, MouseEventArgs e)
@@ -68,11 +86,12 @@ namespace CircuitrySimulator
 
             newObject.Name = newElementName + totalComponentCount;
 
-            Canvas.SetLeft(newObject, e.GetPosition(DrawingBoard).X - 50);
-            Canvas.SetTop(newObject, e.GetPosition(DrawingBoard).Y - 50);
+            Canvas.SetLeft(newObject, e.GetPosition(DrawingBoard).X - 35);
+            Canvas.SetTop(newObject, e.GetPosition(DrawingBoard).Y - 35);
 
             DrawingBoard.Children.Add(newObject);
         }
+
 
         public void PlaceChildObject(UIElement child)
         {

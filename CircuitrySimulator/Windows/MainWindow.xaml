@@ -87,7 +87,7 @@
                         Panel.ZIndex="1">
 
                 <Label Content="Панель элементов"/>
-                
+
                 <Expander Header="Основные компоненты">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -120,6 +120,30 @@
                             </Button>
 
                             <TextBlock Text="Логическое НЕ" 
+                                       TextWrapping="WrapWithOverflow"
+                                       FontSize="12"
+                                       Width="65"
+                                       TextAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="3" Grid.Row="0" Grid.Column="2">
+                            <Button Name="PowerButton" Click="SetState_FromButton">
+                                <Image Source="/Images/Components/Edited/power.png" Height="65" Margin="10 0 10 0"/>
+                            </Button>
+
+                            <TextBlock Text="Питание" 
+                                       TextWrapping="WrapWithOverflow"
+                                       FontSize="12"
+                                       Width="65"
+                                       TextAlignment="Center"/>    
+                        </StackPanel>
+
+                        <StackPanel Margin="3" Grid.Row="1" Grid.Column="0">
+                            <Button Name="GroundButton" Click="SetState_FromButton">
+                                <Image Source="/Images/Components/Edited/ground.png" Height="65" Margin="10 0 10 0"/>
+                            </Button>
+
+                            <TextBlock Text="Земля" 
                                        TextWrapping="WrapWithOverflow"
                                        FontSize="12"
                                        Width="65"
