@@ -15,10 +15,12 @@
     <None Remove="Images\Components\Edited\NOR_edited.png" />
     <None Remove="Images\Components\Edited\OR_edited.png" />
     <None Remove="Images\Components\Edited\power.png" />
+    <None Remove="Images\Components\ground.png" />
     <None Remove="Images\Components\inverter.png" />
     <None Remove="Images\Components\NAND.png" />
     <None Remove="Images\Components\NOR.png" />
     <None Remove="Images\Components\OR.png" />
+    <None Remove="Images\Components\power.png" />
     <None Remove="Images\Editing\delete.png" />
     <None Remove="Images\Editing\selection.png" />
     <None Remove="Images\Editing\wire.png" />
@@ -29,6 +31,12 @@
     <None Remove="Images\save.png" />
     <None Remove="Images\save_as.png" />
     <None Remove="Images\transistor.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Components\ground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -66,6 +74,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Components\OR.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Components\power.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Editing\delete.png">

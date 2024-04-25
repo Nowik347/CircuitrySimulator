@@ -25,7 +25,7 @@ namespace CircuitrySimulator.Classes
 
             Line input1 = new Line
             {
-                Name = this.Name + ".input1",
+                Name = this.Name + "_input1",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this),
@@ -36,7 +36,7 @@ namespace CircuitrySimulator.Classes
 
             Line input2 = new Line
             {
-                Name = this.Name + ".input2",
+                Name = this.Name + "_input2",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this) + 50,
@@ -47,7 +47,7 @@ namespace CircuitrySimulator.Classes
 
             Line output = new Line
             {
-                Name = this.Name + ".output",
+                Name = this.Name + "_output",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this) + 80,

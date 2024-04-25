@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Ink;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace CircuitrySimulator.Classes
@@ -14,14 +11,6 @@ namespace CircuitrySimulator.Classes
     abstract public class BaseComponent : Image
     {
         Rectangle? selectionFrame;
-
-        public static readonly DependencyProperty EmptyProperty = DependencyProperty.Register(name: "EmptyProperty", propertyType: typeof(Brush), ownerType: typeof(BaseComponent), typeMetadata: new FrameworkPropertyMetadata(defaultValue: new SolidColorBrush(Colors.Black)));
-
-        public Brush StubEmptyProperty
-        {
-            get => (Brush)GetValue(EmptyProperty);
-            set => SetValue(EmptyProperty, value);
-        }
 
         public List<UIElement> childrenElements = new List<UIElement>();
         public List<Line> IOLines = new List<Line>();
@@ -34,29 +23,27 @@ namespace CircuitrySimulator.Classes
         {
             base.OnInitialized(e);
 
-            Binding binding = new Binding
-            {
-                Source = this,
-                Path = new PropertyPath("Name"),
-                Mode = BindingMode.TwoWay,
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
-            };
+            //Binding binding = new Binding
+            //{
+            //    Source = this,
+            //    Path = new PropertyPath("Name"),
+            //    Mode = BindingMode.TwoWay,
+            //    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+            //};
 
-            TextBox componentLabel = new TextBox();
-            childrenElements.Add(componentLabel);
+            //TextBox componentLabel = new TextBox();
 
-            componentLabel.SetBinding(TextBox.TextProperty, binding);
+            //childrenElements.Add(componentLabel);
 
-            componentLabel.FontSize = 14; 
+            //componentLabel.SetBinding(TextBox.TextProperty, binding);
 
-            Canvas.SetLeft(componentLabel, Canvas.GetLeft(this) + labelCorrectionX);
-            Canvas.SetTop(componentLabel, Canvas.GetTop(this) + this.Height + labelCorrectionY);
+            //componentLabel.FontSize = 14;
 
-            tempWindow.PlaceChildObject(componentLabel);
+            //Canvas.SetLeft(componentLabel, Canvas.GetLeft(this) + (int)((componentLabel.ActualWidth / 2) - (this.Width / 2)));
+            //Canvas.SetTop(componentLabel, Canvas.GetTop(this) + this.Height + 10);
 
-            this.TargetUpdated += MyTargetUpdated;
-            this.SourceUpdated += MyTargetUpdated;
-        }
+            //tempWindow.PlaceChildObject(componentLabel);
+        } 
 
         protected override void OnMouseEnter(MouseEventArgs e)
         {
@@ -82,12 +69,9 @@ namespace CircuitrySimulator.Classes
         {
             base.OnGotFocus(e);
 
-            double x = Canvas.GetLeft(this);
-            double y = Canvas.GetTop(this);
-
             tempWindow.currentSelectedObject = this;
 
-            selectionFrame = tempWindow.Draw_Selection_Frame(x, y);
+            selectionFrame = tempWindow.Draw_Selection_Frame(this);
 
             tempWindow.currentState = this.Name;
 
@@ -133,16 +117,10 @@ namespace CircuitrySimulator.Classes
             }
         }
 
-        private void MyTargetUpdated(object sender, DataTransferEventArgs e) 
-        {
-            Simulate();
-        }
-
         protected virtual void Simulate() { }
 
         public void ChildrenOnClick(object sender, MouseButtonEventArgs e) 
         {
-            //Point newPoint = new Point((line.X1 + line.X2) / 2, (line.Y1 + line.Y2) / 2);
             tempWindow.PlaceWire(sender as Line);
         }
 
@@ -156,6 +134,14 @@ namespace CircuitrySimulator.Classes
         {
             Line line = sender as Line;
             line.StrokeThickness = 1;
+        }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+
+            if (this.IsInitialized)
+                Simulate();
         }
     }
 }

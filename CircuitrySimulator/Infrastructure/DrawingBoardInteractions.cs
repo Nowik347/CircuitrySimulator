@@ -17,7 +17,7 @@ namespace CircuitrySimulator
         {
             get { return _rotationAngle; }
 
-            set { _rotationAngle = _rotationAngle == 360 ? 90 : value; }
+            set { _rotationAngle = _rotationAngle == 270 ? 0 : value; }
         }
 
         public string newElementName;
@@ -30,20 +30,39 @@ namespace CircuitrySimulator
         {
             if (drawPreviewImage)
             {
-                PreviewImage previewImage = new PreviewImage
-                {
-                    Name = "previewImage",
-                    Source = new BitmapImage(new Uri("../Images/Components/" + newElementName.ToLower() + ".png", UriKind.Relative)),
-                    Width = 100,
-                    Height = 100,
-                    Opacity = 0.5,
-                    RenderTransform = new RotateTransform(rotationAngle),
-                    RenderTransformOrigin = new Point(0.5, 0.5),
-                    IsEnabled = false
-                };
+                PreviewImage previewImage;
 
-                Canvas.SetLeft(previewImage, e.GetPosition(DrawingBoard).X - 50);
-                Canvas.SetTop(previewImage, e.GetPosition(DrawingBoard).Y - 50);
+                if (newElementName.ToLower() != "power" && newElementName.ToLower() != "ground")
+                {
+                    previewImage = new PreviewImage
+                    {
+                        Name = "previewImage",
+                        Source = new BitmapImage(new Uri("../Images/Components/" + newElementName.ToLower() + ".png", UriKind.Relative)),
+                        Width = 100,
+                        Height = 100,
+                        Opacity = 0.5,
+                        RenderTransform = new RotateTransform(rotationAngle),
+                        RenderTransformOrigin = new Point(0.5, 0.5),
+                        IsEnabled = false,
+                    };
+                }
+                else
+                {
+                    previewImage = new PreviewImage
+                    {
+                        Name = "previewImage",
+                        Source = new BitmapImage(new Uri("../Images/Components/" + newElementName.ToLower() + ".png", UriKind.Relative)),
+                        Width = 55,
+                        Height = 50,
+                        Opacity = 0.5,
+                        RenderTransform = new RotateTransform(rotationAngle),
+                        RenderTransformOrigin = new Point(0.5, 0.5),
+                        IsEnabled = false,
+                    };
+                }
+
+                Canvas.SetLeft(previewImage, e.GetPosition(DrawingBoard).X - previewImage.Width / 2);
+                Canvas.SetTop(previewImage, e.GetPosition(DrawingBoard).Y - previewImage.Height / 2);
 
                 DrawingBoard.Children.Add(previewImage);
             }
@@ -59,9 +78,6 @@ namespace CircuitrySimulator
         {
             if (currentState == "Placement")
                 PlaceObject(e);
-
-            //if (currentState == "Wiring")
-            //    PlaceWire(e);
         }
 
         private void DrawingBoard_MouseMove(object sender, MouseEventArgs e)
@@ -73,8 +89,8 @@ namespace CircuitrySimulator
             {
                 PreviewImage? previewImage = DrawingBoard.Children.OfType<PreviewImage>().FirstOrDefault();
 
-                Canvas.SetLeft(previewImage, e.GetPosition(DrawingBoard).X - 50);
-                Canvas.SetTop(previewImage, e.GetPosition(DrawingBoard).Y - 50);
+                Canvas.SetLeft(previewImage, e.GetPosition(DrawingBoard).X - previewImage.Width / 2);
+                Canvas.SetTop(previewImage, e.GetPosition(DrawingBoard).Y - previewImage.Height / 2);
             }
         }
 
@@ -86,8 +102,8 @@ namespace CircuitrySimulator
 
             newObject.Name = newElementName + totalComponentCount;
 
-            Canvas.SetLeft(newObject, e.GetPosition(DrawingBoard).X - 35);
-            Canvas.SetTop(newObject, e.GetPosition(DrawingBoard).Y - 35);
+            Canvas.SetLeft(newObject, e.GetPosition(DrawingBoard).X - newObject.Width / 2);
+            Canvas.SetTop(newObject, e.GetPosition(DrawingBoard).Y - newObject.Height / 2);
 
             DrawingBoard.Children.Add(newObject);
         }

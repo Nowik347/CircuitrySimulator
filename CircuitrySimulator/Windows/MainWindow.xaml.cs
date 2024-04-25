@@ -1,5 +1,5 @@
 ﻿using CircuitrySimulator.Classes;
-using System.Security.RightsManagement;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -56,20 +56,20 @@ namespace CircuitrySimulator
             StatusLabel.Content = currentState;
         }
 
-        public Rectangle Draw_Selection_Frame(double x, double y)
+        public Rectangle Draw_Selection_Frame(BaseComponent selectedComponent)
         {
             Rectangle selectionFrame = new Rectangle
             {
-                Width = 100,
-                Height = 100,
+                Width = selectedComponent.Width + 10,
+                Height = selectedComponent.Height + 10,
                 Fill = null,
                 StrokeThickness = 2,
                 Stroke = Brushes.Black,
                 StrokeDashArray = new DoubleCollection() { 4, 1 }
             };
 
-            Canvas.SetLeft(selectionFrame, x);
-            Canvas.SetTop(selectionFrame, y);
+            Canvas.SetLeft(selectionFrame, Canvas.GetLeft(selectedComponent) - 5);// - (int)(selectedComponent.Width / 4));
+            Canvas.SetTop(selectionFrame, Canvas.GetTop(selectedComponent) - 5); //- (int)(selectedComponent.Height / 4));
 
             DrawingBoard.Children.Add(selectionFrame);
 
@@ -112,6 +112,15 @@ namespace CircuitrySimulator
 
             currentState = "Wiring";
             UpdateStatusLabel();
+        }
+
+        private void SimulationToggle_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (FrameworkElement i in DrawingBoard.Children)
+            {
+                if (i.GetType().ToString() == "CircuitrySimulator.Classes.Power")
+                    i.Tag = (bool)i.Tag == false ? true : false;
+            }
         }
     }
 }

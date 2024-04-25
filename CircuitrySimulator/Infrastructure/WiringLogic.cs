@@ -1,6 +1,4 @@
-﻿using System;
-using System.DirectoryServices;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -55,32 +53,44 @@ namespace CircuitrySimulator
                 newWire.Points.Add(tetriaryPoint);
                 newWire.Points.Add((Point)endPosition);
 
-                //Binding binding = new Binding
+                Binding bindingColor = new Binding
+                {
+                    Source = newWire,
+                    Path = new PropertyPath("Stroke"),
+                    Mode = BindingMode.TwoWay,
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                };
+
+                Binding bindingTag = new Binding
+                {
+                    Source = newWire,
+                    Path = new PropertyPath("Tag"),
+                    Mode = BindingMode.TwoWay,
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                };
+
+                startLine.SetBinding(Line.StrokeProperty, bindingColor);
+                endLine.SetBinding(Line.StrokeProperty, bindingColor);
+
+                startLine.SetBinding(Line.TagProperty, bindingTag);
+                endLine.SetBinding(Line.TagProperty, bindingTag);
+
+                //Binding inputBinding = new Binding
+                //{
+                //    Source = startLine,
+                //    Path = new PropertyPath("Stroke"),
+                //    Mode = BindingMode.OneWay,
+                //};
+
+                //Binding ouputBinding = new Binding
                 //{
                 //    Source = newWire,
                 //    Path = new PropertyPath("Stroke"),
                 //    Mode = BindingMode.OneWay,
                 //};
 
-                //startLine.SetBinding(Line.StrokeProperty, binding);
-                //endLine.SetBinding(Line.StrokeProperty, binding);
-
-                Binding inputBinding = new Binding
-                {
-                    Source = startLine,
-                    Path = new PropertyPath("Stroke"),
-                    Mode = BindingMode.OneWay,
-                };
-
-                Binding ouputBinding = new Binding
-                {
-                    Source = newWire,
-                    Path = new PropertyPath("Stroke"),
-                    Mode = BindingMode.OneWay,
-                };
-
-                newWire.SetBinding(Polyline.StrokeProperty, inputBinding);
-                endLine.SetBinding(Line.StrokeProperty, ouputBinding);
+                //newWire.SetBinding(Polyline.StrokeProperty, inputBinding);
+                //endLine.SetBinding(Line.StrokeProperty, ouputBinding);
 
                 startLine = null;
             }

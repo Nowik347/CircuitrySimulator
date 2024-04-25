@@ -4,6 +4,7 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
+using System.Windows.Data;
 
 namespace CircuitrySimulator.Classes
 {
@@ -26,7 +27,7 @@ namespace CircuitrySimulator.Classes
 
             Line input1 = new Line
             {
-                Name = this.Name + ".input1",
+                Name = this.Name + "_input1",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this) - 15,
@@ -37,7 +38,7 @@ namespace CircuitrySimulator.Classes
 
             Line input2 = new Line
             {
-                Name = this.Name + ".input2",
+                Name = this.Name + "_input2",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this) - 15,
@@ -46,9 +47,37 @@ namespace CircuitrySimulator.Classes
                 Y2 = Canvas.GetTop(this) + 45,
             };
 
+            Binding binding1 = new Binding
+            {
+                Source = input1,
+                Path = new PropertyPath("Tag"),
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                NotifyOnSourceUpdated = true,
+                NotifyOnTargetUpdated = true,
+            };
+
+            this.SetBinding(Image.TagProperty, binding1);
+
+            input1.Stroke = new SolidColorBrush(Colors.Black);
+
+            Binding binding2 = new Binding
+            {
+                Source = input2,
+                Path = new PropertyPath("Tag"),
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                NotifyOnSourceUpdated = true,
+                NotifyOnTargetUpdated = true,
+            };
+
+            this.SetBinding(Image.TagProperty, binding2);
+
+            input2.Stroke = new SolidColorBrush(Colors.Black);
+
             Line output = new Line
             {
-                Name = this.Name + ".output",
+                Name = this.Name + "_output",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this) + 52,
@@ -77,6 +106,20 @@ namespace CircuitrySimulator.Classes
             tempWindow.PlaceChildObject(input2);
             tempWindow.PlaceChildObject(output);
         }
+
+        protected override void Simulate()
+        {
+            if (IOLines[0].Stroke.ToString() == Colors.Green.ToString() && IOLines[1].Stroke.ToString() == Colors.Green.ToString())
+            {
+                IOLines[2].Stroke = new SolidColorBrush(Colors.Green);
+                IOLines[2].Tag = true;
+            }
+            else
+            {
+                IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
+                IOLines[2].Tag = false;
+            }
+        }
     }
 
     class OR : BaseComponent
@@ -97,7 +140,7 @@ namespace CircuitrySimulator.Classes
 
             Line input1 = new Line
             {
-                Name = this.Name + ".input1",
+                Name = this.Name + "_input1",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this) - 15,
@@ -108,7 +151,7 @@ namespace CircuitrySimulator.Classes
 
             Line input2 = new Line
             {
-                Name = this.Name + ".input2",
+                Name = this.Name + "_input2",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this) - 15,
@@ -117,9 +160,37 @@ namespace CircuitrySimulator.Classes
                 Y2 = Canvas.GetTop(this) + 45,
             };
 
+            Binding binding1 = new Binding
+            {
+                Source = input1,
+                Path = new PropertyPath("Tag"),
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                NotifyOnSourceUpdated = true,
+                NotifyOnTargetUpdated = true,
+            };
+
+            this.SetBinding(Image.TagProperty, binding1);
+
+            input1.Stroke = new SolidColorBrush(Colors.Black);
+
+            Binding binding2 = new Binding
+            {
+                Source = input2,
+                Path = new PropertyPath("Tag"),
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                NotifyOnSourceUpdated = true,
+                NotifyOnTargetUpdated = true,
+            };
+
+            this.SetBinding(Image.TagProperty, binding2);
+
+            input2.Stroke = new SolidColorBrush(Colors.Black);
+
             Line output = new Line
             {
-                Name = this.Name + ".output",
+                Name = this.Name + "_output",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this) + 53,
@@ -148,6 +219,20 @@ namespace CircuitrySimulator.Classes
             tempWindow.PlaceChildObject(input2);
             tempWindow.PlaceChildObject(output);
         }
+
+        protected override void Simulate()
+        {
+            if (IOLines[0].Stroke.ToString() == Colors.Green.ToString() || IOLines[1].Stroke.ToString() == Colors.Green.ToString())
+            {
+                IOLines[2].Stroke = new SolidColorBrush(Colors.Green);
+                IOLines[2].Tag = true;
+            }
+            else
+            {
+                IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
+                IOLines[2].Tag = false;
+            }
+        }
     }
 
     class NAND : BaseComponent
@@ -168,7 +253,7 @@ namespace CircuitrySimulator.Classes
 
             Line input1 = new Line
             {
-                Name = this.Name + ".input1",
+                Name = this.Name + "_input1",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this) - 15,
@@ -179,7 +264,7 @@ namespace CircuitrySimulator.Classes
 
             Line input2 = new Line
             {
-                Name = this.Name + ".input2",
+                Name = this.Name + "_input2",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this) - 15,
@@ -188,9 +273,37 @@ namespace CircuitrySimulator.Classes
                 Y2 = Canvas.GetTop(this) + 45,
             };
 
+            Binding binding1 = new Binding
+            {
+                Source = input1,
+                Path = new PropertyPath("Tag"),
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                NotifyOnSourceUpdated = true,
+                NotifyOnTargetUpdated = true,
+            };
+
+            this.SetBinding(Image.TagProperty, binding1);
+
+            input1.Stroke = new SolidColorBrush(Colors.Black);
+
+            Binding binding2 = new Binding
+            {
+                Source = input2,
+                Path = new PropertyPath("Tag"),
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                NotifyOnSourceUpdated = true,
+                NotifyOnTargetUpdated = true,
+            };
+
+            this.SetBinding(Image.TagProperty, binding2);
+
+            input2.Stroke = new SolidColorBrush(Colors.Black);
+
             Line output = new Line
             {
-                Name = this.Name + ".output",
+                Name = this.Name + "_output",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this) + 60,
@@ -218,6 +331,20 @@ namespace CircuitrySimulator.Classes
             tempWindow.PlaceChildObject(input1);
             tempWindow.PlaceChildObject(input2);
             tempWindow.PlaceChildObject(output);
+        }
+
+        protected override void Simulate()
+        {
+            if (IOLines[0].Stroke.ToString() == Colors.Black.ToString() && IOLines[1].Stroke.ToString() == Colors.Black.ToString())
+            {
+                IOLines[2].Stroke = new SolidColorBrush(Colors.Green);
+                IOLines[2].Tag = true;
+            }
+            else
+            {
+                IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
+                IOLines[2].Tag = false;
+            }
         }
     }
 
@@ -239,7 +366,7 @@ namespace CircuitrySimulator.Classes
 
             Line input1 = new Line
             {
-                Name = this.Name + ".input1",
+                Name = this.Name + "_input1",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this) - 15,
@@ -250,7 +377,7 @@ namespace CircuitrySimulator.Classes
 
             Line input2 = new Line
             {
-                Name = this.Name + ".input2",
+                Name = this.Name + "_input2",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this) - 15,
@@ -259,9 +386,37 @@ namespace CircuitrySimulator.Classes
                 Y2 = Canvas.GetTop(this) + 45,
             };
 
+            Binding binding1 = new Binding
+            {
+                Source = input1,
+                Path = new PropertyPath("Tag"),
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                NotifyOnSourceUpdated = true,
+                NotifyOnTargetUpdated = true,
+            };
+
+            this.SetBinding(Image.TagProperty, binding1);
+
+            input1.Stroke = new SolidColorBrush(Colors.Black);
+
+            Binding binding2 = new Binding
+            {
+                Source = input2,
+                Path = new PropertyPath("Tag"),
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                NotifyOnSourceUpdated = true,
+                NotifyOnTargetUpdated = true,
+            };
+
+            this.SetBinding(Image.TagProperty, binding2);
+
+            input2.Stroke = new SolidColorBrush(Colors.Black);
+
             Line output = new Line
             {
-                Name = this.Name + ".output",
+                Name = this.Name + "_output",
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 1,
                 X1 = Canvas.GetLeft(this) + 60,
@@ -289,6 +444,20 @@ namespace CircuitrySimulator.Classes
             tempWindow.PlaceChildObject(input1);
             tempWindow.PlaceChildObject(input2);
             tempWindow.PlaceChildObject(output);
+        }
+
+        protected override void Simulate()
+        {
+            if (IOLines[0].Stroke.ToString() == Colors.Green.ToString() || IOLines[1].Stroke.ToString() == Colors.Green.ToString())
+            {
+                IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
+                IOLines[2].Tag = true;
+            }
+            else
+            {
+                IOLines[2].Stroke = new SolidColorBrush(Colors.Green);
+                IOLines[2].Tag = false;
+            }
         }
     }
 }

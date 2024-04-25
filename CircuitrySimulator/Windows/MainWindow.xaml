@@ -39,19 +39,19 @@
             <!--Панель инструментов-->
             <ToolBarTray Orientation="Horizontal">
                 <ToolBar Name="MainToolbar">
-                    <Button Name="NewFileButton">
+                    <Button Name="NewFileButton" Click="NewFileButton_Click">
                         <Image Source="/Images/Main Items/new_file.png" Height="25"/>
                     </Button>
 
-                    <Button Name="LoadFromFileButton">
+                    <Button Name="LoadFromFileButton" Click="LoadFromFileButton_Click">
                         <Image Source="/Images/Main Items/from_file.png" Height="25"/>
                     </Button>
 
-                    <Button Name="SaveButton">
+                    <Button Name="SaveButton" Click="SaveButton_Click">
                         <Image Source="/Images/Main Items/save.png" Height="25"/>
                     </Button>
 
-                    <Button Name="SaveAsButton">
+                    <Button Name="SaveAsButton" Click="SaveAsButton_Click">
                         <Image Source="/Images/Main Items/save_as.png" Height="25"/>
                     </Button>
                 </ToolBar>
@@ -71,7 +71,7 @@
                 </ToolBar>
 
                 <ToolBar Name="SimulationToolbar">
-                    <ToggleButton>
+                    <ToggleButton Name="SimulationToggle" Click="SimulationToggle_Click">
                         <Image Source="../Images/Simulation/image.png" Height="25"/>
                     </ToggleButton>
                 </ToolBar>
@@ -88,7 +88,7 @@
 
                 <Label Content="Панель элементов"/>
 
-                <Expander Header="Основные компоненты">
+                <Expander Header="Основные компоненты" IsExpanded="True">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -128,7 +128,7 @@
 
                         <StackPanel Margin="3" Grid.Row="0" Grid.Column="2">
                             <Button Name="PowerButton" Click="SetState_FromButton">
-                                <Image Source="/Images/Components/Edited/power.png" Height="65" Margin="10 0 10 0"/>
+                                <Image Source="/Images/Components/power.png" Height="65" Margin="10 0 10 0"/>
                             </Button>
 
                             <TextBlock Text="Питание" 
@@ -140,7 +140,7 @@
 
                         <StackPanel Margin="3" Grid.Row="1" Grid.Column="0">
                             <Button Name="GroundButton" Click="SetState_FromButton">
-                                <Image Source="/Images/Components/Edited/ground.png" Height="65" Margin="10 0 10 0"/>
+                                <Image Source="/Images/Components/ground.png" Height="65" Margin="10 0 10 0"/>
                             </Button>
 
                             <TextBlock Text="Земля" 
@@ -152,7 +152,7 @@
                     </Grid>
                 </Expander>
 
-                <Expander Header="Логические компоненты">
+                <Expander Header="Логические компоненты" IsExpanded="True">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
