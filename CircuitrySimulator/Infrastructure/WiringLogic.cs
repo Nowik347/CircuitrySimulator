@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -38,6 +40,7 @@ namespace CircuitrySimulator
                 {
                     Stroke = new SolidColorBrush(Colors.Black),
                     StrokeThickness = 2,
+                    Tag = false,
                 };
 
                 newWire.MouseLeftButtonUp += OnMouseDown;

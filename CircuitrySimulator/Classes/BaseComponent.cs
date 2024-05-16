@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,42 +9,36 @@ using System.Windows.Shapes;
 
 namespace CircuitrySimulator.Classes
 {
-    abstract public class BaseComponent : Image
+    abstract public partial class BaseComponent : Image
     {
-        Rectangle? selectionFrame;
+        public class PinConverter : IMultiValueConverter
+        {
+            public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+            {
+                bool result = false;
+
+                foreach (var item in values)
+                {
+                    if (result == true)
+                        break;
+
+                    result = (bool)item;
+                }
+
+                return result;
+            }
+
+            public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+            {
+                return (object[])value;
+            }
+        }
+
+        public Rectangle? selectionFrame;
 
         public List<UIElement> childrenElements = new List<UIElement>();
         public List<Line> IOLines = new List<Line>();
         public double internalRotationAngle;
-        public int labelCorrectionX, labelCorrectionY;
-
-        readonly public MainWindow tempWindow = (MainWindow)Application.Current.MainWindow;
-
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-
-            //Binding binding = new Binding
-            //{
-            //    Source = this,
-            //    Path = new PropertyPath("Name"),
-            //    Mode = BindingMode.TwoWay,
-            //    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
-            //};
-
-            //TextBox componentLabel = new TextBox();
-
-            //childrenElements.Add(componentLabel);
-
-            //componentLabel.SetBinding(TextBox.TextProperty, binding);
-
-            //componentLabel.FontSize = 14;
-
-            //Canvas.SetLeft(componentLabel, Canvas.GetLeft(this) + (int)((componentLabel.ActualWidth / 2) - (this.Width / 2)));
-            //Canvas.SetTop(componentLabel, Canvas.GetTop(this) + this.Height + 10);
-
-            //tempWindow.PlaceChildObject(componentLabel);
-        } 
 
         protected override void OnMouseEnter(MouseEventArgs e)
         {
@@ -69,22 +64,22 @@ namespace CircuitrySimulator.Classes
         {
             base.OnGotFocus(e);
 
-            tempWindow.currentSelectedObject = this;
+            ((MainWindow)Application.Current.MainWindow).currentSelectedObject = this;
 
-            selectionFrame = tempWindow.Draw_Selection_Frame(this);
+            selectionFrame = ((MainWindow)Application.Current.MainWindow).Draw_Selection_Frame(this);
 
-            tempWindow.currentState = this.Name;
+            ((MainWindow)Application.Current.MainWindow).currentState = this.Name;
 
-            tempWindow.UpdateStatusLabel();
+            ((MainWindow)Application.Current.MainWindow).UpdateStatusLabel();
         }
 
         protected override void OnLostFocus(RoutedEventArgs e)
         {
             base.OnLostFocus(e);
 
-            tempWindow.currentSelectedObject = null;
+            ((MainWindow)Application.Current.MainWindow).currentSelectedObject = null;
 
-            tempWindow.Remove_Selection_Frame(selectionFrame);
+            ((MainWindow)Application.Current.MainWindow).Remove_Selection_Frame(selectionFrame);
 
             selectionFrame = null;
         }
@@ -92,21 +87,21 @@ namespace CircuitrySimulator.Classes
         public void DeleteChildren()
         {
             foreach (UIElement i in childrenElements)
-                tempWindow.DeleteChildObject(i);
+                ((MainWindow)Application.Current.MainWindow).DeleteChildObject(i);
 
             foreach (UIElement i in IOLines)
-                tempWindow.DeleteChildObject(i);
+                ((MainWindow)Application.Current.MainWindow).DeleteChildObject(i);
         }
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
 
-            switch(tempWindow.currentState)
+            switch (((MainWindow)Application.Current.MainWindow).currentState)
             {
                 case "Deletion":
                     DeleteChildren();
-                    tempWindow.DeleteObject(this);
+                    ((MainWindow)Application.Current.MainWindow).DeleteObject(this);
                     break;
                 case "Wiring":
                 case "Placement":
@@ -119,28 +114,11 @@ namespace CircuitrySimulator.Classes
 
         protected virtual void Simulate() { }
 
-        public void ChildrenOnClick(object sender, MouseButtonEventArgs e) 
-        {
-            tempWindow.PlaceWire(sender as Line);
-        }
-
-        public void ChildrenMouseEnter(object sender, MouseEventArgs e)
-        {
-            Line line = sender as Line;
-            line.StrokeThickness = 5;
-        }
-
-        public void ChildrenMouseLeave(object sender, MouseEventArgs e)
-        {
-            Line line = sender as Line;
-            line.StrokeThickness = 1;
-        }
-
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
 
-            if (this.IsInitialized)
+            if (this.IsInitialized && IOLines.Count != 0)
                 Simulate();
         }
     }

@@ -246,7 +246,9 @@
                     MouseMove="DrawingBoard_MouseMove" 
                     MouseLeftButtonDown="DrawingBoard_MouseLeftButtonDown"
                     MouseEnter="DrawingBoard_MouseEnter"
-                    MouseLeave="DrawingBoard_MouseLeave"/>
+                    MouseLeave="DrawingBoard_MouseLeave">
+                <TextBox Text="asdasdasdasd"/>
+            </Canvas>
         </DockPanel>
 
         <StackPanel Grid.Row="2" 

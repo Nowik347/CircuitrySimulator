@@ -72,9 +72,9 @@ namespace CircuitrySimulator.Classes
             IOLines.Add(input2);
             IOLines.Add(output);
 
-            tempWindow.PlaceChildObject(input1);
-            tempWindow.PlaceChildObject(input2);
-            tempWindow.PlaceChildObject(output);
+            ((MainWindow)Application.Current.MainWindow).PlaceChildObject(input1);
+            ((MainWindow)Application.Current.MainWindow).PlaceChildObject(input2);
+            ((MainWindow)Application.Current.MainWindow).PlaceChildObject(output);
         }
     }
 }

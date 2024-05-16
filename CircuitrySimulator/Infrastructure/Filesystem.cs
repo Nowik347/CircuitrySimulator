@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Windows;
-using System.Text.Json;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace CircuitrySimulator
 {
@@ -24,83 +25,37 @@ namespace CircuitrySimulator
             {
                 // Save document
                 currentFileName = dialog.FileName;
-                SaveButton_Click(sender, e);
+                List<SerializebleData> data = SerializeCircuitData();
+
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Formatting = Formatting.Indented;
+
+                using (StreamWriter sw = new StreamWriter(currentFileName))
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    serializer.Serialize(writer, data);
+                }
             }
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (currentFileName == null)
+            if (currentFileName == "" || currentFileName == null)
             {
                 SaveAsButton_Click(sender, e);
             }
-
-            //    // Construct a SoapFormatter and use it
-            //    // to serialize the data to the stream.
-            //SoapFormatter formatter = new SoapFormatter();
-            //    try
-            //    {
-            //        formatter.Serialize(fs, addresses);
-            //    }
-            //    catch (SerializationException e)
-            //    {
-            //        Console.WriteLine("Failed to serialize. Reason: " + e.Message);
-            //        throw;
-            //    }
-            //    finally
-            //    {
-            //        fs.Close();
-            //    }
-
-            //using (var stream = File.Open(currentFileName, FileMode.Create))
-            //{
-            //    using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
-            //    {
-            //        writer.Write((object)DrawingBoard.Children);
-            //        writer.Write(e);
-            //    }
-            //}
-
-            //            //Create the stream to add object into it.  
-            //            System.IO.Stream ms = File.OpenWrite(currentFileName);
-            //            //Format the object as Binary  
-
-            //            Inverter inverter = new Inverter(90);
-
-            //            BinaryFormatter formatter = new BinaryFormatter();
-            //            //It serialize the employee object  
-            //#pragma warning disable SYSLIB0011 // Тип или член устарел
-            //            //foreach (UIElement i in DrawingBoard.Children)
-            //            formatter.Serialize(ms, inverter);
-            //#pragma warning restore SYSLIB0011 // Тип или член устарел
-            //            ms.Flush();
-            //            ms.Close();
-            //            ms.Dispose();
-
-            //FileStream fs = File.Open(currentFileName, FileMode.Create);
-            //XamlWriter.Save(DrawingBoard, fs);
-            //fs.Close();
-
-            StreamWriter writer = new StreamWriter(currentFileName);
-
-            var options = new JsonSerializerOptions
+            else
             {
-                IgnoreReadOnlyProperties = true,
-                WriteIndented = true,
-            };
+                List<SerializebleData> data = SerializeCircuitData();
 
-            try
-            {
-                foreach (UIElement i in DrawingBoard.Children)
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Formatting = Formatting.Indented;
+
+                using (StreamWriter sw = new StreamWriter(currentFileName))
+                using (JsonWriter writer = new JsonTextWriter(sw))
                 {
-                    var contentsToWriteToFile = JsonSerializer.Serialize(i, options);
-                    writer.Write(contentsToWriteToFile);
+                    serializer.Serialize(writer, data);
                 }
-            }
-            finally
-            {
-                if (writer != null)
-                    writer.Close();
             }
         }
 
@@ -118,12 +73,13 @@ namespace CircuitrySimulator
             // Process save file dialog box results
             if (result == true)
             {
+                // Save document
                 currentFileName = dialog.FileName;
-                string jsonString = File.ReadAllText(currentFileName);
-                var objects = JsonSerializer.Deserialize<UIElement>(jsonString)!;
-                DrawingBoard.Children.Clear();
-                DrawingBoard.Children.Add(objects);
-            }         
+
+                List<SerializebleData> data = JsonConvert.DeserializeObject<List<SerializebleData>>(File.ReadAllText(currentFileName));
+
+                DeserializeCircuitData(data);
+            }
         }
 
         private void NewFileButton_Click(object sender, RoutedEventArgs e)

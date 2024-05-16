@@ -108,7 +108,6 @@ namespace CircuitrySimulator
             DrawingBoard.Children.Add(newObject);
         }
 
-
         public void PlaceChildObject(UIElement child)
         {
             DrawingBoard.Children.Add(child);
