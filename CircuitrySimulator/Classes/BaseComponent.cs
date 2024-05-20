@@ -19,10 +19,11 @@ namespace CircuitrySimulator.Classes
 
                 foreach (var item in values)
                 {
-                    if (result == true)
+                    if ((bool)item == true)
+                    {
+                        result = (bool)item;
                         break;
-
-                    result = (bool)item;
+                    }
                 }
 
                 return result;

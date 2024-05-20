@@ -1,6 +1,7 @@
 ﻿using CircuitrySimulator.Classes;
 using System;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -98,14 +99,18 @@ namespace CircuitrySimulator
         {
             BaseComponent? newObject = Activator.CreateInstance(Type.GetType("CircuitrySimulator.Classes." + newElementName), new object[] { rotationAngle }) as BaseComponent;
 
-            totalComponentCount++;
+            StringBuilder builder = new StringBuilder();
+            Enumerable.Range(65, 26).Select(e => ((char)e).ToString()).Concat(Enumerable.Range(97, 26).Select(e => ((char)e).ToString()))
+                .Concat(Enumerable.Range(0, 10).Select(e => e.ToString())).OrderBy(e => Guid.NewGuid()).Take(9).ToList().ForEach(e => builder.Append(e));
 
-            newObject.Name = newElementName + totalComponentCount;
+            newObject.Name = newElementName + "_" + builder.ToString();
 
             Canvas.SetLeft(newObject, e.GetPosition(DrawingBoard).X - newObject.Width / 2);
             Canvas.SetTop(newObject, e.GetPosition(DrawingBoard).Y - newObject.Height / 2);
 
             DrawingBoard.Children.Add(newObject);
+
+            totalComponentCount++;
         }
 
         public void PlaceChildObject(UIElement child)

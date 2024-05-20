@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 
 namespace CircuitrySimulator
 {
@@ -46,7 +47,17 @@ namespace CircuitrySimulator
                         circuitData.Add(textBoxData);
                         break;
                     case "System.Windows.Shapes.Line":
+                        break;
                     case "System.Windows.Shapes.Polyline":
+                        Polyline polyline = item as Polyline;
+
+                        SerializebleData polylineData = new SerializebleData();
+
+                        polylineData.typeName = item.GetType().ToString();
+                        polylineData.data.Add(polyline.Name.Split('x')[0]);
+                        polylineData.data.Add(polyline.Name.Split('x')[1]);
+
+                        circuitData.Add(polylineData);
                         break;
                     default:
                         BaseComponent component = item as BaseComponent;
@@ -56,6 +67,7 @@ namespace CircuitrySimulator
                         componentData.typeName = item.GetType().ToString();
                         componentData.position = new Point(Canvas.GetLeft(component), Canvas.GetTop(component));
                         componentData.data.Add(component.internalRotationAngle.ToString());
+                        componentData.data.Add(component.Name);
 
                         circuitData.Add(componentData);
                         break;
@@ -85,14 +97,27 @@ namespace CircuitrySimulator
                         //circuitData.Add(textBoxData);
                         break;
                     case "System.Windows.Shapes.Line":
+                        break;
                     case "System.Windows.Shapes.Polyline":
+                        Line line_a = FindElement(item.data[0]) as Line;
+
+                        if (line_a == null)
+                            break;
+
+                        Line line_b = FindElement(item.data[1]) as Line;
+
+                        if (line_b == null)
+                            break;
+
+                        PlaceWire(line_a);
+                        PlaceWire(line_b);
                         break;
                     default:
                         BaseComponent? newObject = Activator.CreateInstance(Type.GetType(item.typeName), new object[] { int.Parse(item.data[0]) }) as BaseComponent;
 
                         totalComponentCount++;
 
-                        newObject.Name = newObject.GetType().Name + totalComponentCount;
+                        newObject.Name = item.data[1];
 
                         Canvas.SetLeft(newObject, item.position.Value.X);
                         Canvas.SetTop(newObject, item.position.Value.Y);
@@ -101,6 +126,17 @@ namespace CircuitrySimulator
                         break;
                 }
             }
+        }
+
+        private FrameworkElement FindElement(string name)
+        {
+            foreach (FrameworkElement item in DrawingBoard.Children)
+            {
+                if (item.Name == name)
+                    return item;
+            }
+
+            return null;
         }
     }
 }

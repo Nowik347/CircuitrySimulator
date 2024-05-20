@@ -12,7 +12,8 @@ namespace CircuitrySimulator.Classes
     {
         public void ChildrenOnClick(object sender, MouseButtonEventArgs e)
         {
-            ((MainWindow)Application.Current.MainWindow).PlaceWire(sender as Line);
+            if (((MainWindow)Application.Current.MainWindow).currentState == "Wiring")
+                ((MainWindow)Application.Current.MainWindow).PlaceWire(sender as Line);
         }
 
         public void ChildrenMouseEnter(object sender, MouseEventArgs e)

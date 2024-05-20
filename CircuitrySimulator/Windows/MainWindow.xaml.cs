@@ -53,7 +53,7 @@ namespace CircuitrySimulator
 
         public void UpdateStatusLabel()
         {
-            StatusLabel.Content = currentState;
+            StatusLabel.Text = currentState;
         }
 
         public Rectangle Draw_Selection_Frame(BaseComponent selectedComponent)

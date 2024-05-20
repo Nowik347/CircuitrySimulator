@@ -246,9 +246,7 @@
                     MouseMove="DrawingBoard_MouseMove" 
                     MouseLeftButtonDown="DrawingBoard_MouseLeftButtonDown"
                     MouseEnter="DrawingBoard_MouseEnter"
-                    MouseLeave="DrawingBoard_MouseLeave">
-                <TextBox Text="asdasdasdasd"/>
-            </Canvas>
+                    MouseLeave="DrawingBoard_MouseLeave"/>
         </DockPanel>
 
         <StackPanel Grid.Row="2" 
@@ -256,10 +254,10 @@
                     Orientation="Horizontal" 
                     Panel.ZIndex="1">
 
-            <Label Name="StatusLabel" 
-                   Content="{Binding currentState, ElementName=window}"
+            <TextBlock Name="StatusLabel" TextAlignment="Center" Margin="5 0 0 0"
+                   Text="{Binding currentState, ElementName=window}"
                    FontSize="12" 
-                   Grid.Row="2"/>
+                   Grid.Row="2" VerticalAlignment="Center"/>
 
             <Label Name="PositionLabel" 
                    Content="0,0" 
