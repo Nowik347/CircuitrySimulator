@@ -185,7 +185,7 @@ namespace CircuitrySimulator
         {
             Polyline newWire = new Polyline
             {
-                Name = line_1.Name + "x" + line_2.Name,
+                Name = line_1.Name + "Ф" + line_2.Name,
                 Stroke = new SolidColorBrush(Colors.Black),
                 StrokeThickness = 2,
                 Tag = false,

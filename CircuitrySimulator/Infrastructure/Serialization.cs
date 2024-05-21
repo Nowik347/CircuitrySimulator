@@ -54,8 +54,8 @@ namespace CircuitrySimulator
                         SerializebleData polylineData = new SerializebleData();
 
                         polylineData.typeName = item.GetType().ToString();
-                        polylineData.data.Add(polyline.Name.Split('x')[0]);
-                        polylineData.data.Add(polyline.Name.Split('x')[1]);
+                        polylineData.data.Add(polyline.Name.Split('Ф')[0]);
+                        polylineData.data.Add(polyline.Name.Split('Ф')[1]);
 
                         circuitData.Add(polylineData);
                         break;
