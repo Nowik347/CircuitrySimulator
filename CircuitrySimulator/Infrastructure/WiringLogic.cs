@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CircuitrySimulator.Infrastructure;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -10,176 +11,71 @@ namespace CircuitrySimulator
     public partial class MainWindow : Window
     {
         private Line? line_1, line_2;
-        private enum Direction { Up, Down, Left, Right };
-        public Polyline? currentWire;
 
         public void PlaceWire(Line line)
         {
-            if (line == line_1) 
+            if (line == line_1)
                 return;
 
             if (line_1 == null)
             {
                 line_1 = line;
-            }  
+            }
             else
             {
                 line_2 = line;
 
-                ConnectOnePoint();
+                Pathfinder pathfinder = new Pathfinder(DrawingBoard);
+
+                List<Point> path = pathfinder.FindPath(new Point(line_1.X2, line_1.Y2), new Point(line_2.X2, line_2.Y2));
+
+                DrawingBoard.Children.Add(CreateWire(path));
 
                 line_1 = null;
+                line_2 = null;
             }
         }
 
-        private void ConnectOnePoint()
-        {
-            Point startPosition = new Point(line_1.X2, line_1.Y2);
-            Point endPosition = new Point(line_2.X2, line_2.Y2);
-            Direction startLineDirection = GetLineDirection(line_1);
-            Point Point_1;
+        //private List<List<Node>> CalculateBoardPathingMap()
+        //{
+        //    List<List<Node>> boardPathingMap = new List<List<Node>>();
 
-            if (startLineDirection == Direction.Up || startLineDirection == Direction.Down)
-                Point_1 = new Point(startPosition.X, endPosition.Y);
-            else
-                Point_1 = new Point(endPosition.X, startPosition.Y);
+        //    for (int y = 0; y < DrawingBoard.ActualHeight; y++)
+        //    {
+        //        List<Node> mapLine = new List<Node>();
 
-            if (CheckCollision(startPosition, Point_1, endPosition))
-                Point_1 = new Point(Point_1.X == startPosition.X ? endPosition.X : startPosition.X, Point_1.Y == startPosition.Y ? endPosition.Y : startPosition.Y);
+        //        for (int x = 0; x < DrawingBoard.ActualWidth; x++)
+        //        {
+        //            HitTestResult result = VisualTreeHelper.HitTest(DrawingBoard, new Point(x, y));
 
-            if (CheckCollision(startPosition, Point_1, endPosition))
-            {
-                ConnectTwoPoint();
-                return;
-            };
+        //            if (result.VisualHit.ToString() != "System.Windows.Controls.Canvas")
+        //                mapLine.Add(new Node(new Vector2(x, y), false, 0));
+        //            else
+        //                mapLine.Add(new Node(new Vector2(x, y), true , 0));
+        //        }
 
-            DrawingBoard.Children.Add(CreateWire(new List<Point> { startPosition, Point_1, endPosition }));
-        }
+        //        boardPathingMap.Add(mapLine);
+        //    }
 
-        private void ConnectTwoPoint()
-        {
+        //    return boardPathingMap;
+        //}
 
-        }
+        //private void CalculatePathingMap()
+        //{
+        //    if (line_1.X2
+        //    for (double y = line_1.X2; y < DrawingBoard.ActualHeight; y++)
+        //    {
+        //        for (double x = line_1.Y2; x < DrawingBoard.ActualWidth; x++)
+        //        {
+        //            HitTestResult result = VisualTreeHelper.HitTest(DrawingBoard, new Point(x, y));
 
-        private bool CheckCollision(Point startPosition, Point point, Point endPosition)
-        {
-            bool collision = false;
-
-            if (startPosition.X == point.X)
-            {
-                if (startPosition.Y > point.Y)
-                {
-                    for (double y = startPosition.Y; y > point.Y; y--)
-                    {
-                        HitTestResult result = VisualTreeHelper.HitTest(DrawingBoard, new Point(startPosition.X, y));
-
-                        if (result.VisualHit == line_1 || result.VisualHit == line_2 || result.VisualHit == DrawingBoard)
-                            continue;
-
-                        if (result != null)
-                            collision = true;
-                    }
-                }
-                else
-                {
-                    for (double y = startPosition.Y; y < point.Y; y++)
-                    {
-                        HitTestResult result = VisualTreeHelper.HitTest(DrawingBoard, new Point(startPosition.X, y));
-
-                        if (result.VisualHit == line_1 || result.VisualHit == line_2 || result.VisualHit == DrawingBoard)
-                            continue;
-
-                        if (result != null)
-                            collision = true;
-                    }
-                }
-                
-                if (endPosition.X > point.X)
-                {
-                    for (double x = endPosition.X; x < point.X; x++)
-                    {
-                        HitTestResult result = VisualTreeHelper.HitTest(DrawingBoard, new Point(x, endPosition.Y));
-
-                        if (result.VisualHit == line_1 || result.VisualHit == line_2 || result.VisualHit == DrawingBoard)
-                            continue;
-
-                        if (result != null)
-                            collision = true;
-                    }
-                }
-                else
-                {
-                    for (double x = endPosition.X; x > point.X; x--)
-                    {
-                        HitTestResult result = VisualTreeHelper.HitTest(DrawingBoard, new Point(x, endPosition.Y));
-
-                        if (result.VisualHit == line_1 || result.VisualHit == line_2 || result.VisualHit == DrawingBoard)
-                            continue;
-
-                        if (result != null)
-                            collision = true;
-                    }
-                }
-            }
-            else
-            {
-                if (endPosition.Y > point.Y)
-                {
-                    for (double y = endPosition.Y; y > point.Y; y--)
-                    {
-                        HitTestResult result = VisualTreeHelper.HitTest(DrawingBoard, new Point(endPosition.X, y));
-
-                        if (result.VisualHit == line_1 || result.VisualHit == line_2 || result.VisualHit == DrawingBoard)
-                            continue;
-
-                        if (result != null)
-                            collision = true;
-                    }
-                }
-                else
-                {
-                    for (double y = endPosition.Y; y < point.Y; y++)
-                    {
-                        HitTestResult result = VisualTreeHelper.HitTest(DrawingBoard, new Point(endPosition.X, y));
-
-                        if (result.VisualHit == line_1 || result.VisualHit == line_2 || result.VisualHit == DrawingBoard)
-                            continue;
-
-                        if (result != null)
-                            collision = true;
-                    }
-                }
-
-                if (startPosition.X > point.X)
-                {
-                    for (double x = startPosition.X; x < point.X; x++)
-                    {
-                        HitTestResult result = VisualTreeHelper.HitTest(DrawingBoard, new Point(x, startPosition.Y));
-
-                        if (result.VisualHit == line_1 || result.VisualHit == line_2 || result.VisualHit == DrawingBoard)
-                            continue;
-
-                        if (result != null)
-                            collision = true;
-                    }
-                }
-                else
-                {
-                    for (double x = startPosition.X; x > point.X; x--)
-                    {
-                        HitTestResult result = VisualTreeHelper.HitTest(DrawingBoard, new Point(x, startPosition.Y));
-
-                        if (result.VisualHit == line_1 || result.VisualHit == line_2 || result.VisualHit == DrawingBoard)
-                            continue;
-
-                        if (result != null)
-                            collision = true;
-                    }
-                }
-            }
-
-            return collision;
-        }
+        //            if (result != null)
+        //                boardPathingMap[(short)y, (short)x] = 1;
+        //            else
+        //                boardPathingMap[(short)y, (short)x] = 1;
+        //        }
+        //    }
+        //}
 
         private Polyline CreateWire(List<Point> points)
         {
@@ -227,24 +123,6 @@ namespace CircuitrySimulator
             line_2.SetBinding(Line.StrokeProperty, colorBinding);
 
             return newWire;
-        }
-
-        private Direction GetLineDirection(Line line)
-        {
-            if (line.X1 == line.X2)
-            {
-                if (line.Y1 - line.Y2 > 0)
-                    return Direction.Up;
-                else
-                    return Direction.Down;
-            }
-            else
-            {
-                if (line.X1 - line.X2 > 0)
-                    return Direction.Left;
-                else
-                    return Direction.Right;
-            }
         }
 
         private void OnMouseLeave(object sender, MouseEventArgs e)
