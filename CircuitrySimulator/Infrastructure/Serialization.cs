@@ -54,8 +54,22 @@ namespace CircuitrySimulator
                         SerializebleData polylineData = new SerializebleData();
 
                         polylineData.typeName = item.GetType().ToString();
-                        polylineData.data.Add(polyline.Name.Split('Ф')[0]);
-                        polylineData.data.Add(polyline.Name.Split('Ф')[1]);
+
+                        if (polyline.Name.Contains('Ш'))
+                        {
+                            polylineData.data.Add(polyline.Name.Split('Ш')[0]);
+                            polylineData.data.Add(polyline.Name.Split('Ш')[1]);
+                        }
+                        else if (polyline.Name.Contains('П'))
+                        {
+                            polylineData.data.Add(polyline.Name.Split('П')[0]);
+                            polylineData.data.Add(polyline.Name.Split('П')[1]);
+                        }
+                        else
+                        {
+                            polylineData.data.Add(polyline.Name.Split('Ф')[0]);
+                            polylineData.data.Add(polyline.Name.Split('Ф')[1]);
+                        }
 
                         circuitData.Add(polylineData);
                         break;
@@ -99,18 +113,18 @@ namespace CircuitrySimulator
                     case "System.Windows.Shapes.Line":
                         break;
                     case "System.Windows.Shapes.Polyline":
-                        Line line_a = FindElement(item.data[0]) as Line;
+                        object element_a = FindElement(item.data[0]);
 
-                        if (line_a == null)
+                        if (element_a == null)
                             break;
 
-                        Line line_b = FindElement(item.data[1]) as Line;
+                        object element_b = FindElement(item.data[1]);
 
-                        if (line_b == null)
+                        if (element_b == null)
                             break;
 
-                        PlaceWire(line_a);
-                        PlaceWire(line_b);
+                        PlaceWire(element_a);
+                        PlaceWire(element_b);
                         break;
                     default:
                         BaseComponent? newObject = Activator.CreateInstance(Type.GetType(item.typeName), new object[] { int.Parse(item.data[0]) }) as BaseComponent;

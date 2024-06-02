@@ -1,6 +1,6 @@
-﻿using CircuitrySimulator.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -14,6 +14,7 @@ namespace CircuitrySimulator.Infrastructure
         private double currentDistanceToEndX, currentDistanceToEndY;
         private Point currentPoint, startPoint, endPoint;
         private Direction? currentDirection;
+        private List<Point> path = new List<Point>();
 
         public Pathfinder(Canvas canvas)
         { 
@@ -27,91 +28,141 @@ namespace CircuitrySimulator.Infrastructure
 
             currentPoint = startPoint;
 
-            currentDistanceToEndX = Math.Abs(endPoint.X - currentPoint.X);
-            currentDistanceToEndY = Math.Abs(endPoint.Y - currentPoint.Y);
-
-            List<Point> path = new List<Point>();
+            CalculateDistance();
 
             currentDirection = CheckNeighbours();
 
-            for (int i = 0; i < 10000; i++)
+            path.Add(currentPoint);
+
+            for (int i = 0; i < 10; i++)
             {
-                path.Add(currentPoint);
-
-                currentPoint = Step(currentDirection);
-
-                currentDistanceToEndX = Math.Abs(endPoint.X - currentPoint.X);
-                currentDistanceToEndY = Math.Abs(endPoint.Y - currentPoint.Y);
-
                 if (currentDistanceToEndX < 1 && currentDistanceToEndY < 1)
                     break;
 
+                bool hitSomething = Follow(currentDirection);
+
                 currentDirection = CheckNeighbours();
+
+                if (hitSomething)
+                {
+                    if (path.Count < 10)
+                    {
+                        currentPoint = startPoint;
+
+                        CalculateDistance();
+                    }
+                    else
+                    {
+                        for (int j = 0; j < 20; j++)
+                            path.Remove(path.Last());
+
+                        currentPoint = path.Last();
+
+                        CalculateDistance();
+                    }
+                }
             }
 
             return path;
         }
 
-        private Point Step(Direction? direction)
+        private void CalculateDistance()
         {
-            Point newPoint = currentPoint;
+            currentDistanceToEndX = Math.Abs(endPoint.X - currentPoint.X);
+            currentDistanceToEndY = Math.Abs(endPoint.Y - currentPoint.Y);
+        }
 
-            switch (direction)
+        private bool Follow(Direction? direction)
+        {
+            double distance = 10;
+
+            do
             {
-                case Direction.Left:
-                    newPoint.X--;
-                    break;
-                case Direction.Right:
-                    newPoint.X++;
-                    break;
-                case Direction.Up:
-                    newPoint.Y--;
-                    break;
-                case Direction.Down:
-                    newPoint.Y++;
-                    break;
-            }
+                Point newPoint = currentPoint;
 
-            return newPoint;
+                switch (direction)
+                {
+                    case Direction.Left:
+                        newPoint.X--;
+                        distance = currentDistanceToEndX;
+                        break;
+                    case Direction.Right:
+                        newPoint.X++;
+                        distance = currentDistanceToEndX;
+                        break;
+                    case Direction.Up:
+                        newPoint.Y--;
+                        distance = currentDistanceToEndY;
+                        break;
+                    case Direction.Down:
+                        newPoint.Y++;
+                        distance = currentDistanceToEndY;
+                        break;
+                }
+
+                if (CheckCollision(newPoint))
+                    return true;
+
+                currentPoint = newPoint;
+
+                path.Add(currentPoint);
+
+                CalculateDistance();
+            } while (distance > 1);
+
+            return false;
         }
 
         private bool CheckCollision(Point point)
         {
             HitTestResult result = VisualTreeHelper.HitTest(map, point);
 
-            if (result.VisualHit.ToString() != "System.Windows.Controls.Canvas")
-                return false;
-            else
+            object hitObject = result.VisualHit;
+
+            if (result.VisualHit.ToString() != "System.Windows.Controls.Canvas" && result.VisualHit.ToString() != "System.Windows.Shapes.Polyline" && hitObject != ((MainWindow)Application.Current.MainWindow).endWire)
                 return true;
+            else
+                return false;
         }
 
         private Direction? CheckNeighbours()
         {
-            Point neighbour = new Point( currentPoint.X + 1, currentPoint.Y);
+            int[,] modifiers = new int[4, 2] { { 1, 0 }, { -1, 0 }, { 0, -1 }, { 0, 1 } };
 
-            if (CheckCollision(neighbour))  
-                if (Math.Abs(endPoint.X - neighbour.X) < currentDistanceToEndX)
-                    return Direction.Right;
+            for (int i = 0; i < 4; i++)
+            {
+                Point neighbour = new Point(currentPoint.X + modifiers[i, 0], currentPoint.Y + modifiers[i, 1]);
 
-            neighbour = new Point(currentPoint.X - 1, currentPoint.Y);
+                if (!CheckCollision(neighbour))
+                    if ((i < 2 ? Math.Abs(endPoint.X - neighbour.X) : Math.Abs(endPoint.Y - neighbour.Y)) < (i < 2 ? currentDistanceToEndX : currentDistanceToEndY))
+                        return (Direction)i;
+            }
 
-            if (CheckCollision(neighbour))
-                if (Math.Abs(endPoint.X - neighbour.X) < currentDistanceToEndX)
-                    return Direction.Left;
+            //Point neighbour = new Point( currentPoint.X + 1, currentPoint.Y);
 
-            neighbour = new Point(currentPoint.X, currentPoint.Y - 1);
+            //if (CheckCollision(neighbour))  
+            //    if (Math.Abs(endPoint.X - neighbour.X) < currentDistanceToEndX)
+            //        return Direction.Right;
 
-            if (CheckCollision(neighbour))
-                if (Math.Abs(endPoint.Y - neighbour.Y) < currentDistanceToEndY)
-                    return Direction.Up;
+            //neighbour = new Point(currentPoint.X - 1, currentPoint.Y);
 
-            neighbour = new Point(currentPoint.X, currentPoint.Y + 1);
+            //if (CheckCollision(neighbour))
+            //    if (Math.Abs(endPoint.X - neighbour.X) < currentDistanceToEndX)
+            //        return Direction.Left;
 
-            if (CheckCollision(neighbour))
-                if (Math.Abs(endPoint.Y - neighbour.Y) < currentDistanceToEndY)
-                    return Direction.Down;
+            //neighbour = new Point(currentPoint.X, currentPoint.Y - 1);
 
-            return  currentDirection;
+            //if (CheckCollision(neighbour))
+            //    if (Math.Abs(endPoint.Y - neighbour.Y) < currentDistanceToEndY)
+            //        return Direction.Up;
+
+            //neighbour = new Point(currentPoint.X, currentPoint.Y + 1);
+
+            //if (CheckCollision(neighbour))
+            //    if (Math.Abs(endPoint.Y - neighbour.Y) < currentDistanceToEndY)
+            //        return Direction.Down;
+
+            return currentDirection;
         }
     }
 }

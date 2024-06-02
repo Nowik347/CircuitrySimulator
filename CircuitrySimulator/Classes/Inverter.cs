@@ -26,6 +26,9 @@ namespace CircuitrySimulator.Classes
 
             foreach (var item in IOLines)
                 ((MainWindow)Application.Current.MainWindow).PlaceChildObject(item);
+
+            IOLines[1].Stroke = new SolidColorBrush(Colors.Black);
+            IOLines[1].Tag = false;
         }
 
         protected override void Simulate() 

@@ -26,6 +26,9 @@ namespace CircuitrySimulator.Classes
 
             foreach (var item in IOLines)
                 ((MainWindow)Application.Current.MainWindow).PlaceChildObject(item);
+
+            IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
+            IOLines[2].Tag = false;
         }
 
         protected override void Simulate()
@@ -66,6 +69,9 @@ namespace CircuitrySimulator.Classes
 
             foreach (var item in IOLines)
                 ((MainWindow)Application.Current.MainWindow).PlaceChildObject(item);
+
+            IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
+            IOLines[2].Tag = false;
         }
 
         protected override void Simulate()
@@ -106,20 +112,23 @@ namespace CircuitrySimulator.Classes
 
             foreach (var item in IOLines)
                 ((MainWindow)Application.Current.MainWindow).PlaceChildObject(item);
+
+            IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
+            IOLines[2].Tag = false;
         }
 
         protected override void Simulate()
         {
             base.Simulate();
             
-            if (IOLines[0].Stroke.ToString() == Colors.Black.ToString() && IOLines[1].Stroke.ToString() == Colors.Black.ToString())
+            if (IOLines[0].Stroke.ToString() == Colors.Green.ToString() && IOLines[1].Stroke.ToString() == Colors.Green.ToString())
             {
-                IOLines[2].Stroke = new SolidColorBrush(Colors.Green);
+                IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
                 IOLines[2].Tag = true;
             }
             else
             {
-                IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
+                IOLines[2].Stroke = new SolidColorBrush(Colors.Green);
                 IOLines[2].Tag = false;
             }
         }
@@ -146,6 +155,9 @@ namespace CircuitrySimulator.Classes
 
             foreach (var item in IOLines)
                 ((MainWindow)Application.Current.MainWindow).PlaceChildObject(item);
+
+            IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
+            IOLines[2].Tag = false;
         }
 
         protected override void Simulate()
