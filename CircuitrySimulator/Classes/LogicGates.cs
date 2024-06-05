@@ -176,4 +176,52 @@ namespace CircuitrySimulator.Classes
             }
         }
     }
+
+    class XOR : BaseComponent
+    {
+        public XOR(double rotationAngle)
+        {
+            Source = new BitmapImage(new Uri("../Images/Components/Edited/XOR_edited.png", UriKind.Relative));
+            Width = 50;
+            Height = 50;
+            RenderTransform = new RotateTransform(rotationAngle);
+            RenderTransformOrigin = new Point(0.5, 0.5);
+            Focusable = true;
+            internalRotationAngle = rotationAngle;
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+
+            IOLines = CreatePins(2, 1);
+
+            foreach (var item in IOLines)
+                ((MainWindow)Application.Current.MainWindow).PlaceChildObject(item);
+
+            IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
+            IOLines[2].Tag = false;
+        }
+
+        protected override void Simulate()
+        {
+            base.Simulate();
+
+            if (IOLines[0].Stroke.ToString() == Colors.Green.ToString() && IOLines[1].Stroke.ToString() == Colors.Green.ToString())
+            {
+                IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
+                IOLines[2].Tag = false;
+            }
+            else if (IOLines[0].Stroke.ToString() == Colors.Green.ToString() || IOLines[1].Stroke.ToString() == Colors.Green.ToString())
+            {
+                IOLines[2].Stroke = new SolidColorBrush(Colors.Green);
+                IOLines[2].Tag = true;
+            }
+            else
+            {
+                IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
+                IOLines[2].Tag = false;
+            }
+        }
+    }
 }

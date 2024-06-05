@@ -24,7 +24,7 @@ namespace CircuitrySimulator
 
         private void SetState_FromButton(object sender, RoutedEventArgs e)
         {
-            string senderName = ((Button)sender).Name.ToString().Trim();
+            string senderName = ((System.Windows.Controls.Button)sender).Name.ToString().Trim();
 
             newElementName = senderName.Remove(senderName.Length - 6);
 

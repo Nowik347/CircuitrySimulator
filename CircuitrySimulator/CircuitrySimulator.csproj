@@ -10,12 +10,16 @@
   <ItemGroup>
     <None Remove="Images\Components\AND.png" />
     <None Remove="Images\Components\Edited\AND_edited.png" />
+    <None Remove="Images\Components\Edited\button_edited.png" />
+    <None Remove="Images\Components\Edited\diode_edited.png" />
     <None Remove="Images\Components\Edited\ground.png" />
     <None Remove="Images\Components\Edited\inverter_edited.png" />
     <None Remove="Images\Components\Edited\NAND_edited.png" />
     <None Remove="Images\Components\Edited\NOR_edited.png" />
     <None Remove="Images\Components\Edited\OR_edited.png" />
+    <None Remove="Images\Components\Edited\oscilator_edited.png" />
     <None Remove="Images\Components\Edited\power.png" />
+    <None Remove="Images\Components\Edited\XOR_edited.png" />
     <None Remove="Images\Components\ground.png" />
     <None Remove="Images\Components\inverter.png" />
     <None Remove="Images\Components\NAND.png" />
@@ -35,11 +39,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\Components\Edited\button_edited.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Images\Components\Edited\AND_edited.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Components\Edited\diode_edited.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Components\Edited\oscilator_edited.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Components\Edited\XOR_edited.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Components\ground.png">

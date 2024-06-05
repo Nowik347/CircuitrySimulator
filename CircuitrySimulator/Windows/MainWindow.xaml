@@ -74,6 +74,18 @@
                     <ToggleButton Name="SimulationToggle" Click="SimulationToggle_Click">
                         <Image Source="../Images/Simulation/image.png" Height="25"/>
                     </ToggleButton>
+
+                    <ToggleButton Name="OscilatorsToggle" Click="SimulationToggle_Click">
+                        <Image Source="../Images/Components/Edited/oscilator_edited.png" Height="25"/>
+                    </ToggleButton>
+
+                    <ComboBox Name="FrequencySelector" Width="100">
+                        <ComboBoxItem Content="1 Гц"/>
+                        <ComboBoxItem Content="10 Гц"/>
+                        <ComboBoxItem Content="100 Гц"/>
+                        <ComboBoxItem Content="1 кГц"/>
+                        <ComboBoxItem Content="2 кГц"/>
+                    </ComboBox>
                 </ToolBar>
             </ToolBarTray>
         </StackPanel>
@@ -149,6 +161,30 @@
                                        Width="65"
                                        TextAlignment="Center"/>
                         </StackPanel>
+
+                        <StackPanel Margin="3" Grid.Row="1" Grid.Column="1">
+                            <Button Name="DiodeButton" Click="SetState_FromButton">
+                                <Image Source="/Images/Components/diode.png" Height="65" Margin="10 0 10 0"/>
+                            </Button>
+
+                            <TextBlock Text="Светодиод" 
+                               TextWrapping="WrapWithOverflow"
+                               FontSize="12"
+                               Width="65"
+                               TextAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="3" Grid.Row="1" Grid.Column="2">
+                            <Button Name="OscilatorButton" Click="SetState_FromButton">
+                                <Image Source="/Images/Components/oscilator.png" Height="65" Margin="10 0 10 0"/>
+                            </Button>
+
+                            <TextBlock Text="Тактовый генератор" 
+                               TextWrapping="WrapWithOverflow"
+                               FontSize="12"
+                               Width="65"
+                               TextAlignment="Center"/>
+                        </StackPanel>
                     </Grid>
                 </Expander>
 
@@ -171,7 +207,7 @@
                                 <Image Source="/Images/Components/AND.png" Height="65"/>
                             </Button>
 
-                            <TextBlock Text="Логическое И" 
+                            <TextBlock Text="И" 
                                        TextWrapping="WrapWithOverflow"
                                        FontSize="12"
                                        Width="65"
@@ -183,7 +219,7 @@
                                 <Image Source="/Images/Components/OR.png" Height="65"/>
                             </Button>
 
-                            <TextBlock Text="Логическое ИЛИ" 
+                            <TextBlock Text="ИЛИ" 
                                        TextWrapping="WrapWithOverflow"
                                        FontSize="12"
                                        Width="65"
@@ -195,7 +231,7 @@
                                 <Image Source="/Images/Components/NAND.png" Height="65"/>
                             </Button>
 
-                            <TextBlock Text="Логическое И-НЕ" 
+                            <TextBlock Text="И-НЕ" 
                                        TextWrapping="WrapWithOverflow"
                                        FontSize="12"
                                        Width="65"
@@ -207,15 +243,69 @@
                                 <Image Source="/Images/Components/NOR.png" Height="65"/>
                             </Button>
 
-                            <TextBlock Text="Логическое ИЛИ-НЕ" 
+                            <TextBlock Text="ИЛИ-НЕ" 
                                        TextWrapping="WrapWithOverflow"
                                        FontSize="12"
                                        Width="65"
                                        TextAlignment="Center"/>
                         </StackPanel>
+
+                        <StackPanel Margin="3" Grid.Row="1" Grid.Column="1">
+                            <Button Name="XORButton" Click="SetState_FromButton">
+                                <Image Source="/Images/Components/XOR.png" Height="65"/>
+                            </Button>
+
+                            <TextBlock Text="ИЛИ по модулю 2" 
+                               TextWrapping="WrapWithOverflow"
+                               FontSize="12"
+                               Width="65"
+                               TextAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </Expander>
+
+                <Expander Header="Интерактивные компоненты" IsExpanded="True">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Margin="3" Grid.Row="0" Grid.Column="0">
+                            <Button Name="ButtonButton" Click="SetState_FromButton">
+                                <Image Source="/Images/Components/button.png" Height="65"/>
+                            </Button>
+
+                            <TextBlock Text="Кнопка" 
+                                TextWrapping="WrapWithOverflow"
+                                FontSize="12"
+                                Width="65"
+                                TextAlignment="Center"/>
+                        </StackPanel>   
+
+                        <StackPanel Margin="3" Grid.Row="0" Grid.Column="1">
+                            <Button Name="SwitchButton" Click="SetState_FromButton">
+                                <Image Source="/Images/Components/switch.png" Height="65"/>
+                            </Button>
+
+                            <TextBlock Text="Переключатель" 
+                               TextWrapping="WrapWithOverflow"
+                               FontSize="12"
+                               Width="65"
+                               TextAlignment="Center"/> 
+                        </StackPanel>
                     </Grid>
                 </Expander>
             </StackPanel>
+            
+            
 
             <!--Панель настроек-->
             <DockPanel Name="PropertiesPanel"
