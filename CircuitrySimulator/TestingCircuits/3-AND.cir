@@ -1,0 +1,138 @@
+[
+  {
+    "typeName": "CircuitrySimulator.Classes.NAND",
+    "position": "514,237",
+    "data": [
+      "0",
+      "NAND_N6QsVCbWB"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Inverter",
+    "position": "650,238",
+    "data": [
+      "0",
+      "Inverter_ZMp1XcoKN"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.NAND",
+    "position": "773,411",
+    "data": [
+      "0",
+      "NAND_41EcReugs"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Inverter",
+    "position": "917,412",
+    "data": [
+      "0",
+      "Inverter_sU5cNfZw0"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Diode",
+    "position": "1067,412",
+    "data": [
+      "0",
+      "Diode_pgRtcNlLP"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "NAND_N6QsVCbWB_output1",
+      "Inverter_ZMp1XcoKN_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Inverter_ZMp1XcoKN_output1",
+      "NAND_41EcReugs_input2"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "NAND_41EcReugs_output1",
+      "Inverter_sU5cNfZw0_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Inverter_sU5cNfZw0_output1",
+      "Diode_pgRtcNlLP_input1"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.SubCircuitPin",
+    "position": "395,232",
+    "data": [
+      "0",
+      "SubCircuitPin_KawsSoAPG"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.SubCircuitPin",
+    "position": "395,267",
+    "data": [
+      "0",
+      "SubCircuitPin_OuA0H72jq"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.SubCircuitPin",
+    "position": "684,435",
+    "data": [
+      "0",
+      "SubCircuitPin_KLzbdwReG"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuitPin_KawsSoAPG_output1",
+      "NAND_N6QsVCbWB_input2"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuitPin_OuA0H72jq_output1",
+      "NAND_N6QsVCbWB_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuitPin_KawsSoAPG_output1",
+      "NAND_N6QsVCbWB_input2"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuitPin_OuA0H72jq_output1",
+      "NAND_N6QsVCbWB_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuitPin_KLzbdwReG_output1",
+      "NAND_41EcReugs_input1"
+    ]
+  }
+]

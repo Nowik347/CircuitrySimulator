@@ -1,0 +1,122 @@
+[
+  {
+    "typeName": "CircuitrySimulator.Classes.SubCircuit",
+    "position": "607,304",
+    "data": [
+      "0",
+      "SubCircuit_Jh9XMsleq"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Diode",
+    "position": "788,303",
+    "data": [
+      "0",
+      "Diode_sluegIqNk"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Diode",
+    "position": "788,361",
+    "data": [
+      "0",
+      "Diode_m24g1YfXy"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Power",
+    "position": "396,190",
+    "data": [
+      "90",
+      "Power_FBpMPrtxi"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Switch",
+    "position": "474,243",
+    "data": [
+      "0",
+      "Switch_UqD2PSZjs"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Switch",
+    "position": "475,317",
+    "data": [
+      "0",
+      "Switch_Vd6vIzNZX"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Switch",
+    "position": "475,396",
+    "data": [
+      "0",
+      "Switch_1vsmONwf7"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Switch_1vsmONwf7_input1",
+      "Power_FBpMPrtxi_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Switch_UqD2PSZjs_input1",
+      "Switch_1vsmONwf7_input1ФPower_FBpMPrtxi_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Switch_Vd6vIzNZX_input1",
+      "Switch_1vsmONwf7_input1ФPower_FBpMPrtxi_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Switch_UqD2PSZjs_output1",
+      "SubCircuit_Jh9XMsleq_input3"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Switch_Vd6vIzNZX_output1",
+      "SubCircuit_Jh9XMsleq_input2"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Switch_1vsmONwf7_output1",
+      "SubCircuit_Jh9XMsleq_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuit_Jh9XMsleq_output1",
+      "Diode_m24g1YfXy_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuit_Jh9XMsleq_output2",
+      "Diode_sluegIqNk_input1"
+    ]
+  }
+]

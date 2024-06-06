@@ -1,0 +1,74 @@
+[
+  {
+    "typeName": "CircuitrySimulator.Classes.SubCircuitPin",
+    "position": "283,280",
+    "data": [
+      "0",
+      "SubCircuitPin_DRgjmOHea"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.SubCircuitPin",
+    "position": "284,332",
+    "data": [
+      "0",
+      "SubCircuitPin_eIoUy59jN"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.AND",
+    "position": "401,296",
+    "data": [
+      "0",
+      "AND_wZjsu7M5N"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuitPin_DRgjmOHea_output1",
+      "AND_wZjsu7M5N_input2"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuitPin_eIoUy59jN_output1",
+      "AND_wZjsu7M5N_input1"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Inverter",
+    "position": "532,296",
+    "data": [
+      "0",
+      "Inverter_muDcvU4F8"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "AND_wZjsu7M5N_output1",
+      "Inverter_muDcvU4F8_input1"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.SubCircuitPin",
+    "position": "676,304",
+    "data": [
+      "180",
+      "SubCircuitPin_HAXDSqJz4"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Inverter_muDcvU4F8_output1",
+      "SubCircuitPin_HAXDSqJz4_output1"
+    ]
+  }
+]

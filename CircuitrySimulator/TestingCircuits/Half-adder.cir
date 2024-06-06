@@ -1,0 +1,210 @@
+[
+  {
+    "typeName": "CircuitrySimulator.Classes.XOR",
+    "position": "634,254",
+    "data": [
+      "0",
+      "XOR_TUvXiVHem"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.AND",
+    "position": "559,513",
+    "data": [
+      "0",
+      "AND_VwelCK2uf"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.OR",
+    "position": "776,465",
+    "data": [
+      "0",
+      "OR_ksWgL51z4"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Power",
+    "position": "194,90",
+    "data": [
+      "90",
+      "Power_MnTl6ArxI"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Switch",
+    "position": "280,153",
+    "data": [
+      "0",
+      "Switch_h3tQjAyPe"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Switch",
+    "position": "283,223",
+    "data": [
+      "0",
+      "Switch_BdtMbTUJH"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Switch",
+    "position": "281,314",
+    "data": [
+      "0",
+      "Switch_NmuITGDw0"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Switch_NmuITGDw0_input1",
+      "Power_MnTl6ArxI_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Switch_BdtMbTUJH_input1",
+      "Switch_NmuITGDw0_input1ФPower_MnTl6ArxI_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Switch_h3tQjAyPe_input1",
+      "Switch_NmuITGDw0_input1ФPower_MnTl6ArxI_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "AND_VwelCK2uf_output1",
+      "OR_ksWgL51z4_input1"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Diode",
+    "position": "766,254",
+    "data": [
+      "0",
+      "Diode_zIHKi0Tbq"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Diode",
+    "position": "897,464",
+    "data": [
+      "0",
+      "Diode_1s8uQOvG3"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "XOR_TUvXiVHem_output1",
+      "Diode_zIHKi0Tbq_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "OR_ksWgL51z4_output1",
+      "Diode_1s8uQOvG3_input1"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.XOR",
+    "position": "424,173",
+    "data": [
+      "0",
+      "XOR_7GhQyWCtf"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Switch_h3tQjAyPe_output1",
+      "XOR_7GhQyWCtf_input2"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.AND",
+    "position": "565,423",
+    "data": [
+      "0",
+      "AND_MxP6aBRYk"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "AND_VwelCK2uf_input1",
+      "Switch_NmuITGDw0_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "XOR_TUvXiVHem_input1",
+      "AND_VwelCK2uf_input1ФSwitch_NmuITGDw0_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Switch_BdtMbTUJH_output1",
+      "AND_MxP6aBRYk_input2"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "XOR_7GhQyWCtf_output1",
+      "AND_VwelCK2uf_input2"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "XOR_TUvXiVHem_input2",
+      "XOR_7GhQyWCtf_output1ФAND_VwelCK2uf_input2"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "XOR_7GhQyWCtf_input1",
+      "Switch_BdtMbTUJH_output1ФAND_MxP6aBRYk_input2"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "AND_MxP6aBRYk_input1",
+      "Switch_h3tQjAyPe_output1ФXOR_7GhQyWCtf_input2"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "AND_MxP6aBRYk_output1",
+      "OR_ksWgL51z4_input2"
+    ]
+  }
+]
