@@ -20,15 +20,12 @@ namespace CircuitrySimulator.Classes
 
         protected override void OnInitialized(EventArgs e)
         {
-            base.OnInitialized(e);
-
             IOLines = CreatePins(2, 1);
-
-            foreach (var item in IOLines)
-                ((MainWindow)Application.Current.MainWindow).PlaceChildObject(item);
 
             IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
             IOLines[2].Tag = false;
+
+            base.OnInitialized(e);
         }
 
         protected override void Simulate()
@@ -63,15 +60,12 @@ namespace CircuitrySimulator.Classes
 
         protected override void OnInitialized(EventArgs e)
         {
-            base.OnInitialized(e);
-
             IOLines = CreatePins(2, 1);
-
-            foreach (var item in IOLines)
-                ((MainWindow)Application.Current.MainWindow).PlaceChildObject(item);
 
             IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
             IOLines[2].Tag = false;
+
+            base.OnInitialized(e);
         }
 
         protected override void Simulate()
@@ -106,15 +100,12 @@ namespace CircuitrySimulator.Classes
 
         protected override void OnInitialized(EventArgs e)
         {
-            base.OnInitialized(e);
-
             IOLines = CreatePins(2, 1);
-
-            foreach (var item in IOLines)
-                ((MainWindow)Application.Current.MainWindow).PlaceChildObject(item);
 
             IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
             IOLines[2].Tag = false;
+
+            base.OnInitialized(e);
         }
 
         protected override void Simulate()
@@ -149,15 +140,12 @@ namespace CircuitrySimulator.Classes
 
         protected override void OnInitialized(EventArgs e)
         {
-            base.OnInitialized(e);
-
             IOLines = CreatePins(2, 1);
-
-            foreach (var item in IOLines)
-                ((MainWindow)Application.Current.MainWindow).PlaceChildObject(item);
 
             IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
             IOLines[2].Tag = false;
+
+            base.OnInitialized(e);
         }
 
         protected override void Simulate()
@@ -192,15 +180,12 @@ namespace CircuitrySimulator.Classes
 
         protected override void OnInitialized(EventArgs e)
         {
-            base.OnInitialized(e);
-
             IOLines = CreatePins(2, 1);
-
-            foreach (var item in IOLines)
-                ((MainWindow)Application.Current.MainWindow).PlaceChildObject(item);
 
             IOLines[2].Stroke = new SolidColorBrush(Colors.Black);
             IOLines[2].Tag = false;
+
+            base.OnInitialized(e);
         }
 
         protected override void Simulate()

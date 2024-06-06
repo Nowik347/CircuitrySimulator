@@ -29,11 +29,13 @@
         <StackPanel Grid.Row="0" Panel.ZIndex="1">
             <!--Меню-->
             <Menu>
-                <MenuItem Header="File"/>
-                <MenuItem Header="Edit"/>
+                <MenuItem Header="Файл...">
+                    <MenuItem Name="SubCircuitButton" Header="Загрузить подсхему" Click="SetState_FromButton"/>
+                </MenuItem>
+                <MenuItem Header="Редактирование"/>
                 <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-                <MenuItem Header="Options"/>
-                <MenuItem Header="About"/>
+                <MenuItem Header="Опции"/>
+                <MenuItem Header="О программе"/>
             </Menu>
 
             <!--Панель инструментов-->
@@ -109,14 +111,14 @@
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Margin="3" Grid.Row="0" Grid.Column="0">
-                            <Button Name="TransistorButton" Click="SetState_FromButton">
-                                <Image Source="../Images/Components/transistor.png" Height="65"/>
+                            <Button Name="TransistorButton" Click="SetState_FromButton" Height="65" VerticalContentAlignment="Center">
+                                <Image Source="../Images/Components/Edited/transistor.png" Height="50"/>
                             </Button>
 
                             <TextBlock Text="Транзистор" 
@@ -127,8 +129,8 @@
                         </StackPanel>
 
                         <StackPanel Margin="3" Grid.Row="0" Grid.Column="1">
-                            <Button Name="InverterButton" Click="SetState_FromButton">
-                                <Image Source="/Images/Components/inverter.png" Height="65"/>
+                            <Button Name="InverterButton" Click="SetState_FromButton" Height="65" VerticalContentAlignment="Center">
+                                <Image Source="/Images/Components/Edited/inverter_edited.png" Height="50"/>
                             </Button>
 
                             <TextBlock Text="Логическое НЕ" 
@@ -139,8 +141,8 @@
                         </StackPanel>
 
                         <StackPanel Margin="3" Grid.Row="0" Grid.Column="2">
-                            <Button Name="PowerButton" Click="SetState_FromButton">
-                                <Image Source="/Images/Components/power.png" Height="65" Margin="10 0 10 0"/>
+                            <Button Name="PowerButton" Click="SetState_FromButton" Height="65" VerticalContentAlignment="Center">
+                                <Image Source="/Images/Components/Edited/power_edited.png" Height="50" Margin="10 0 10 0"/>
                             </Button>
 
                             <TextBlock Text="Питание" 
@@ -151,8 +153,8 @@
                         </StackPanel>
 
                         <StackPanel Margin="3" Grid.Row="1" Grid.Column="0">
-                            <Button Name="GroundButton" Click="SetState_FromButton">
-                                <Image Source="/Images/Components/ground.png" Height="65" Margin="10 0 10 0"/>
+                            <Button Name="GroundButton" Click="SetState_FromButton" Height="65" VerticalContentAlignment="Center">
+                                <Image Source="/Images/Components/Edited/ground_edited.png" Height="50" Margin="10 0 10 0"/>
                             </Button>
 
                             <TextBlock Text="Земля" 
@@ -163,8 +165,8 @@
                         </StackPanel>
 
                         <StackPanel Margin="3" Grid.Row="1" Grid.Column="1">
-                            <Button Name="DiodeButton" Click="SetState_FromButton">
-                                <Image Source="/Images/Components/diode.png" Height="65" Margin="10 0 10 0"/>
+                            <Button Name="DiodeButton" Click="SetState_FromButton" Height="65" VerticalContentAlignment="Center">
+                                <Image Source="/Images/Components/Edited/diode_edited.png" Height="50" Margin="10 0 10 0"/>
                             </Button>
 
                             <TextBlock Text="Светодиод" 
@@ -175,11 +177,23 @@
                         </StackPanel>
 
                         <StackPanel Margin="3" Grid.Row="1" Grid.Column="2">
-                            <Button Name="OscilatorButton" Click="SetState_FromButton">
-                                <Image Source="/Images/Components/oscilator.png" Height="65" Margin="10 0 10 0"/>
+                            <Button Name="OscilatorButton" Click="SetState_FromButton" Height="65" VerticalContentAlignment="Center">
+                                <Image Source="/Images/Components/Edited/oscilator_edited.png" Height="50" Margin="10 0 10 0"/>
                             </Button>
 
                             <TextBlock Text="Тактовый генератор" 
+                               TextWrapping="WrapWithOverflow"
+                               FontSize="12"
+                               Width="65"
+                               TextAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="3" Grid.Row="2" Grid.Column="0">
+                            <Button Name="SubCircuitPinButton" Click="SetState_FromButton" Height="65" VerticalContentAlignment="Center">
+                                <Image Source="/Images/Components/Edited/subcircuitpin_edited.png" Height="50" Margin="10 0 10 0"/>
+                            </Button>
+
+                            <TextBlock Text="Контакт подсхемы" 
                                TextWrapping="WrapWithOverflow"
                                FontSize="12"
                                Width="65"
@@ -203,8 +217,8 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Margin="3" Grid.Row="0" Grid.Column="0">
-                            <Button Name="ANDButton" Click="SetState_FromButton">
-                                <Image Source="/Images/Components/AND.png" Height="65"/>
+                            <Button Name="ANDButton" Click="SetState_FromButton" Height="65" VerticalContentAlignment="Center">
+                                <Image Source="/Images/Components/Edited/AND_edited.png" Height="50"/>
                             </Button>
 
                             <TextBlock Text="И" 
@@ -215,8 +229,8 @@
                         </StackPanel>
 
                         <StackPanel Margin="3" Grid.Row="0" Grid.Column="1">
-                            <Button Name="ORButton" Click="SetState_FromButton">
-                                <Image Source="/Images/Components/OR.png" Height="65"/>
+                            <Button Name="ORButton" Click="SetState_FromButton" Height="65" VerticalContentAlignment="Center">
+                                <Image Source="/Images/Components/Edited/OR_edited.png" Height="50"/>
                             </Button>
 
                             <TextBlock Text="ИЛИ" 
@@ -227,8 +241,8 @@
                         </StackPanel>
 
                         <StackPanel Margin="3" Grid.Row="0" Grid.Column="2">
-                            <Button Name="NANDButton" Click="SetState_FromButton">
-                                <Image Source="/Images/Components/NAND.png" Height="65"/>
+                            <Button Name="NANDButton" Click="SetState_FromButton" Height="65" VerticalContentAlignment="Center">
+                                <Image Source="/Images/Components/Edited/NAND_edited.png" Height="50"/>
                             </Button>
 
                             <TextBlock Text="И-НЕ" 
@@ -239,8 +253,8 @@
                         </StackPanel>
 
                         <StackPanel Margin="3" Grid.Row="1" Grid.Column="0">
-                            <Button Name="NORButton" Click="SetState_FromButton">
-                                <Image Source="/Images/Components/NOR.png" Height="65"/>
+                            <Button Name="NORButton" Click="SetState_FromButton" Height="65" VerticalContentAlignment="Center">
+                                <Image Source="/Images/Components/Edited/NOR_edited.png" Height="50"/>
                             </Button>
 
                             <TextBlock Text="ИЛИ-НЕ" 
@@ -251,8 +265,8 @@
                         </StackPanel>
 
                         <StackPanel Margin="3" Grid.Row="1" Grid.Column="1">
-                            <Button Name="XORButton" Click="SetState_FromButton">
-                                <Image Source="/Images/Components/XOR.png" Height="65"/>
+                            <Button Name="XORButton" Click="SetState_FromButton" Height="65" VerticalContentAlignment="Center">
+                                <Image Source="/Images/Components/Edited/XOR_edited.png" Height="50"/>
                             </Button>
 
                             <TextBlock Text="ИЛИ по модулю 2" 
@@ -279,8 +293,8 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Margin="3" Grid.Row="0" Grid.Column="0">
-                            <Button Name="ButtonButton" Click="SetState_FromButton">
-                                <Image Source="/Images/Components/button.png" Height="65"/>
+                            <Button Name="ButtonButton" Click="SetState_FromButton" Height="65" VerticalContentAlignment="Center">
+                                <Image Source="/Images/Components/Edited/button_edited.png" Height="50"/>
                             </Button>
 
                             <TextBlock Text="Кнопка" 
@@ -291,8 +305,8 @@
                         </StackPanel>   
 
                         <StackPanel Margin="3" Grid.Row="0" Grid.Column="1">
-                            <Button Name="SwitchButton" Click="SetState_FromButton">
-                                <Image Source="/Images/Components/switch.png" Height="65"/>
+                            <Button Name="SwitchButton" Click="SetState_FromButton"  Height="65" VerticalContentAlignment="Center">
+                                <Image Source="/Images/Components/Edited/switch_edited.png" Height="50"/>
                             </Button>
 
                             <TextBlock Text="Переключатель" 

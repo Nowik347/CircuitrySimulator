@@ -1,6 +1,4 @@
 ﻿using CircuitrySimulator.Classes;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -24,7 +22,16 @@ namespace CircuitrySimulator
 
         private void SetState_FromButton(object sender, RoutedEventArgs e)
         {
-            string senderName = ((System.Windows.Controls.Button)sender).Name.ToString().Trim();
+            string senderName = "";
+
+            if (sender.GetType().ToString() != "System.Windows.Controls.Button")
+            {
+                senderName = ((System.Windows.Controls.MenuItem)sender).Name.ToString().Trim();
+            }
+            else
+            {
+                senderName = ((System.Windows.Controls.Button)sender).Name.ToString().Trim();
+            } 
 
             newElementName = senderName.Remove(senderName.Length - 6);
 

@@ -78,6 +78,7 @@ namespace CircuitrySimulator.Classes
             RenderTransformOrigin = new Point(0.5, 0.5);
             Focusable = true;
             internalRotationAngle = rotationAngle;
+            Tag = false;
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -112,7 +113,7 @@ namespace CircuitrySimulator.Classes
             ellipse.Fill = new SolidColorBrush(Colors.Green);
             ellipse.Stroke = new SolidColorBrush(Colors.Green);
 
-            this.Tag = true;
+            Simulate();
         }
 
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
@@ -122,7 +123,7 @@ namespace CircuitrySimulator.Classes
             ellipse.Fill = new SolidColorBrush(Colors.Red);
             ellipse.Stroke = new SolidColorBrush(Colors.Red);
 
-            this.Tag = false;
+            Simulate();
         }
 
         protected override void Simulate()
@@ -155,6 +156,7 @@ namespace CircuitrySimulator.Classes
             RenderTransformOrigin = new Point(0.5, 0.5);
             Focusable = true;
             internalRotationAngle = rotationAngle;
+            Tag = false;
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -197,7 +199,7 @@ namespace CircuitrySimulator.Classes
                 ellipse.Stroke = ellipse.Fill;
             }
 
-            this.Tag = true;
+            Simulate();
         }
 
         protected override void Simulate()

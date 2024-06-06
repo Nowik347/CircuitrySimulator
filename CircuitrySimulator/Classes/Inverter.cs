@@ -20,15 +20,12 @@ namespace CircuitrySimulator.Classes
 
         protected override void OnInitialized(EventArgs e)
         {
-            base.OnInitialized(e);
-
             IOLines = CreatePins(1, 1);
-
-            foreach (var item in IOLines)
-                ((MainWindow)Application.Current.MainWindow).PlaceChildObject(item);
 
             IOLines[1].Stroke = new SolidColorBrush(Colors.Black);
             IOLines[1].Tag = false;
+
+            base.OnInitialized(e);
         }
 
         protected override void Simulate() 

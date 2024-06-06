@@ -47,6 +47,7 @@ namespace CircuitrySimulator
                         circuitData.Add(textBoxData);
                         break;
                     case "System.Windows.Shapes.Line":
+                    case "System.Windows.Shapes.Ellipse":
                         break;
                     case "System.Windows.Shapes.Polyline":
                         Polyline polyline = item as Polyline;
@@ -113,18 +114,18 @@ namespace CircuitrySimulator
                     case "System.Windows.Shapes.Line":
                         break;
                     case "System.Windows.Shapes.Polyline":
-                        object element_a = FindElement(item.data[0]);
+                        object element_a = FindElement(item.data[0], DrawingBoard);
 
                         if (element_a == null)
                             break;
 
-                        object element_b = FindElement(item.data[1]);
+                        object element_b = FindElement(item.data[1], DrawingBoard);
 
                         if (element_b == null)
                             break;
 
-                        PlaceWire(element_a);
-                        PlaceWire(element_b);
+                        PlaceWire(element_a, DrawingBoard);
+                        PlaceWire(element_b, DrawingBoard);
                         break;
                     default:
                         BaseComponent? newObject = Activator.CreateInstance(Type.GetType(item.typeName), new object[] { int.Parse(item.data[0]) }) as BaseComponent;
@@ -142,9 +143,9 @@ namespace CircuitrySimulator
             }
         }
 
-        private FrameworkElement FindElement(string name)
+        private FrameworkElement FindElement(string name, Canvas canvas)
         {
-            foreach (FrameworkElement item in DrawingBoard.Children)
+            foreach (FrameworkElement item in canvas.Children)
             {
                 if (item.Name == name)
                     return item;

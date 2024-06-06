@@ -1,15 +1,12 @@
 ﻿using CircuitrySimulator.Classes;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CircuitrySimulator
 {
@@ -36,28 +33,45 @@ namespace CircuitrySimulator
             {
                 PreviewImage previewImage;
 
-                if (newElementName.ToLower() != "power" && newElementName.ToLower() != "ground")
+                if (newElementName.ToLower() != "power" && newElementName.ToLower() != "ground" && newElementName.ToLower() != "subcircuitpin")
                 {
-                    previewImage = new PreviewImage
+                    if (newElementName.ToLower() == "subcircuit")
                     {
-                        Name = "previewImage",
-                        Source = new BitmapImage(new Uri("../Images/Components/" + newElementName.ToLower() + ".png", UriKind.Relative)),
-                        Width = 100,
-                        Height = 100,
-                        Opacity = 0.5,
-                        RenderTransform = new RotateTransform(rotationAngle),
-                        RenderTransformOrigin = new Point(0.5, 0.5),
-                        IsEnabled = false,
-                    };
+                        previewImage = new PreviewImage
+                        {
+                            Name = "previewImage",
+                            Source = new BitmapImage(new Uri("../Images/Components/Edited/" + newElementName.ToLower() + "_edited.png", UriKind.Relative)),
+                            Width = 50,
+                            Height = 100,
+                            Opacity = 0.5,
+                            RenderTransform = new RotateTransform(rotationAngle),
+                            RenderTransformOrigin = new Point(0.5, 0.5),
+                            IsEnabled = false,
+                        };
+                    }
+                    else
+                    {
+                        previewImage = new PreviewImage
+                        {
+                            Name = "previewImage",
+                            Source = new BitmapImage(new Uri("../Images/Components/Edited/" + newElementName.ToLower() + "_edited.png", UriKind.Relative)),
+                            Width = 50,
+                            Height = 50,
+                            Opacity = 0.5,
+                            RenderTransform = new RotateTransform(rotationAngle),
+                            RenderTransformOrigin = new Point(0.5, 0.5),
+                            IsEnabled = false,
+                        };
+                    }
                 }
                 else
                 {
                     previewImage = new PreviewImage
                     {
                         Name = "previewImage",
-                        Source = new BitmapImage(new Uri("../Images/Components/" + newElementName.ToLower() + ".png", UriKind.Relative)),
-                        Width = 55,
-                        Height = 50,
+                        Source = new BitmapImage(new Uri("../Images/Components/Edited/" + newElementName.ToLower() + "_edited.png", UriKind.Relative)),
+                        Width = 30,
+                        Height = 30,
                         Opacity = 0.5,
                         RenderTransform = new RotateTransform(rotationAngle),
                         RenderTransformOrigin = new Point(0.5, 0.5),
@@ -81,7 +95,7 @@ namespace CircuitrySimulator
         private void DrawingBoard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (currentState == "Placement")
-                PlaceObject(e);
+                PlaceObject(e.GetPosition(DrawingBoard).X, e.GetPosition(DrawingBoard).Y);
         }
 
         private void DrawingBoard_MouseMove(object sender, MouseEventArgs e)
@@ -98,9 +112,14 @@ namespace CircuitrySimulator
             }
         }
 
-        private void PlaceObject(MouseButtonEventArgs e)
+        private void PlaceObject(double x, double y)
         {
-            BaseComponent? newObject = Activator.CreateInstance(Type.GetType("CircuitrySimulator.Classes." + newElementName), new object[] { rotationAngle }) as BaseComponent;
+            BaseComponent? newObject = null;
+
+            //if (newElementName == "SubCircuit")
+            //    newObject = Activator.CreateInstance(Type.GetType("CircuitrySimulator.Classes." + newElementName), new object[] { rotationAngle, }) as BaseComponent;
+            //else
+            newObject = Activator.CreateInstance(Type.GetType("CircuitrySimulator.Classes." + newElementName), new object[] { rotationAngle }) as BaseComponent;
 
             StringBuilder builder = new StringBuilder();
             Enumerable.Range(65, 26).Select(e => ((char)e).ToString()).Concat(Enumerable.Range(97, 26).Select(e => ((char)e).ToString()))
@@ -108,8 +127,9 @@ namespace CircuitrySimulator
 
             newObject.Name = newElementName + "_" + builder.ToString();
 
-            Canvas.SetLeft(newObject, e.GetPosition(DrawingBoard).X - newObject.Width / 2);
-            Canvas.SetTop(newObject, e.GetPosition(DrawingBoard).Y - newObject.Height / 2);
+            Canvas.SetLeft(newObject, x - newObject.Width / 2);
+            Canvas.SetTop(newObject, y - newObject.Height / 2);
+            Canvas.SetZIndex(newObject, 2);
 
             DrawingBoard.Children.Add(newObject);
 

@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -16,7 +16,7 @@ namespace CircuitrySimulator
         public object startWire, endWire;
         public Point point_1, point_2;
 
-        public void PlaceWire(object wire)
+        public void PlaceWire(object wire, Canvas placementBoard)
         {
             if (wire == startWire)
                 return;
@@ -29,47 +29,69 @@ namespace CircuitrySimulator
             {
                 endWire = wire;
 
-                Pathfinder pathfinder = new Pathfinder(DrawingBoard);
-
-                if (startWire.GetType().ToString() == "System.Windows.Shapes.Polyline" && endWire.GetType().ToString() == "System.Windows.Shapes.Polyline")
+                if (newElementName != null && newElementName.ToLower() == "subcircuit")
                 {
-                    Polyline polyline_1 = startWire as Polyline, polyline_2 = endWire as Polyline;
-
-                    ClosestPoints closestPoints = FindClosest(polyline_1.Points.ToList(), polyline_2.Points.ToList());
-
-                    List<Point> path = pathfinder.FindPath(closestPoints.P1, closestPoints.P2);
-
-                    DrawingBoard.Children.Add(CreateWire(path, true, true));
-                }
-                else if (startWire.GetType().ToString() == "System.Windows.Shapes.Polyline")
-                {
-                    Polyline polyline = startWire as Polyline;
-                    Line endLine = endWire as Line;
-
-                    ClosestPoints closestPoints = FindClosest(polyline.Points.ToList(), new List<Point> { new Point(endLine.X2, endLine.Y2) });
-
-                    List<Point> path = pathfinder.FindPath(closestPoints.P1, closestPoints.P2);
-
-                    DrawingBoard.Children.Add(CreateWire(path, true, false));
-                }
-                else if (endWire.GetType().ToString() == "System.Windows.Shapes.Polyline")
-                {
-                    Line startLine = startWire as Line;
-                    Polyline polyline = endWire as Polyline;
-
-                    ClosestPoints closestPoints = FindClosest(new List<Point> { new Point(startLine.X2, startLine.Y2) }, polyline.Points.ToList());
-
-                    List<Point> path = pathfinder.FindPath(closestPoints.P1, closestPoints.P2);
-
-                    DrawingBoard.Children.Add(CreateWire(path, false, true));
+                    if (startWire.GetType().ToString() == "System.Windows.Shapes.Polyline" && endWire.GetType().ToString() == "System.Windows.Shapes.Polyline")
+                    {
+                        placementBoard.Children.Add(CreateWire(null, true, true));
+                    }
+                    else if (startWire.GetType().ToString() == "System.Windows.Shapes.Polyline")
+                    {
+                        placementBoard.Children.Add(CreateWire(null, true, false));
+                    }
+                    else if (endWire.GetType().ToString() == "System.Windows.Shapes.Polyline")
+                    {
+                        placementBoard.Children.Add(CreateWire(null, false, true));
+                    }
+                    else
+                    {
+                        placementBoard.Children.Add(CreateWire(null, false, false));
+                    }
                 }
                 else 
                 {
-                    Line startLine = startWire as Line, endLine = endWire as Line;
+                    Pathfinder pathfinder = new Pathfinder(placementBoard);
 
-                    List<Point> path = pathfinder.FindPath(new Point(startLine.X2, startLine.Y2), new Point(endLine.X2, endLine.Y2));
+                    if (startWire.GetType().ToString() == "System.Windows.Shapes.Polyline" && endWire.GetType().ToString() == "System.Windows.Shapes.Polyline")
+                    {
+                        Polyline polyline_1 = startWire as Polyline, polyline_2 = endWire as Polyline;
 
-                    DrawingBoard.Children.Add(CreateWire(path, false, false));
+                        ClosestPoints closestPoints = FindClosest(polyline_1.Points.ToList(), polyline_2.Points.ToList());
+
+                        List<Point> path = pathfinder.FindPath(closestPoints.P1, closestPoints.P2);
+
+                        placementBoard.Children.Add(CreateWire(path, true, true));
+                    }
+                    else if (startWire.GetType().ToString() == "System.Windows.Shapes.Polyline")
+                    {
+                        Polyline polyline = startWire as Polyline;
+                        Line endLine = endWire as Line;
+
+                        ClosestPoints closestPoints = FindClosest(polyline.Points.ToList(), new List<Point> { new Point(endLine.X2, endLine.Y2) });
+
+                        List<Point> path = pathfinder.FindPath(closestPoints.P1, closestPoints.P2);
+
+                        placementBoard.Children.Add(CreateWire(path, true, false));
+                    }
+                    else if (endWire.GetType().ToString() == "System.Windows.Shapes.Polyline")
+                    {
+                        Line startLine = startWire as Line;
+                        Polyline polyline = endWire as Polyline;
+
+                        ClosestPoints closestPoints = FindClosest(new List<Point> { new Point(startLine.X2, startLine.Y2) }, polyline.Points.ToList());
+
+                        List<Point> path = pathfinder.FindPath(closestPoints.P1, closestPoints.P2);
+
+                        placementBoard.Children.Add(CreateWire(path, false, true));
+                    }
+                    else
+                    {
+                        Line startLine = startWire as Line, endLine = endWire as Line;
+
+                        List<Point> path = pathfinder.FindPath(new Point(startLine.X2, startLine.Y2), new Point(endLine.X2, endLine.Y2));
+
+                        placementBoard.Children.Add(CreateWire(path, false, false));
+                    }
                 }
 
                 startWire = null;
@@ -77,7 +99,7 @@ namespace CircuitrySimulator
             }
         }
 
-        private Polyline CreateWire(List<Point> points, bool startPolyline = false, bool endPolyline = false)
+        private Polyline CreateWire(List<Point>? points, bool startPolyline = false, bool endPolyline = false)
         {
             Polyline newWire;
 
@@ -136,10 +158,9 @@ namespace CircuitrySimulator
             newWire.MouseEnter += OnMouseEnter;
             newWire.MouseLeave += OnMouseLeave;
 
-            foreach (var point in points)
-            {
-                newWire.Points.Add(point);
-            }
+            if (points != null)
+                foreach (var point in points)
+                    newWire.Points.Add(point);
 
             if (startPolyline && endPolyline)
             {
@@ -176,7 +197,7 @@ namespace CircuitrySimulator
                 Polyline line_1 = startWire as Polyline;
                 Line line_2 = endWire as Line;
 
-                Binding tagBinding = new Binding
+                Binding tagBinding_1 = new Binding
                 {
                     Source = newWire,
                     Path = new PropertyPath("Tag"),
@@ -186,10 +207,20 @@ namespace CircuitrySimulator
                     NotifyOnTargetUpdated = true,
                 };
 
-                line_1.SetBinding(TagProperty, tagBinding);
-                line_2.SetBinding(TagProperty, tagBinding);
+                Binding tagBinding_2 = new Binding
+                {
+                    Source = line_1,
+                    Path = new PropertyPath("Tag"),
+                    Mode = BindingMode.TwoWay,
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                    NotifyOnSourceUpdated = true,
+                    NotifyOnTargetUpdated = true,
+                };
 
-                Binding colorBinding = new Binding
+                line_2.SetBinding(TagProperty, tagBinding_1);
+                newWire.SetBinding(TagProperty, tagBinding_2);
+
+                Binding colorBinding_1 = new Binding
                 {
                     Source = newWire,
                     Path = new PropertyPath("Stroke"),
@@ -199,15 +230,25 @@ namespace CircuitrySimulator
                     NotifyOnTargetUpdated = true,
                 };
 
-                line_1.SetBinding(Polyline.StrokeProperty, colorBinding);
-                line_2.SetBinding(Line.StrokeProperty, colorBinding);
+                Binding colorBinding_2 = new Binding
+                {
+                    Source = line_1,
+                    Path = new PropertyPath("Stroke"),
+                    Mode = BindingMode.TwoWay,
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                    NotifyOnSourceUpdated = true,
+                    NotifyOnTargetUpdated = true,
+                };
+
+                line_2.SetBinding(Line.StrokeProperty, colorBinding_1);
+                newWire.SetBinding(Polyline.StrokeProperty, colorBinding_2);
             }
             else if (endPolyline)
             {
                 Line line_1 = startWire as Line;
                 Polyline line_2 = endWire as Polyline;
 
-                Binding tagBinding = new Binding
+                Binding tagBinding_1 = new Binding
                 {
                     Source = newWire,
                     Path = new PropertyPath("Tag"),
@@ -217,10 +258,20 @@ namespace CircuitrySimulator
                     NotifyOnTargetUpdated = true,
                 };
 
-                line_1.SetBinding(TagProperty, tagBinding);
-                line_2.SetBinding(TagProperty, tagBinding);
+                Binding tagBinding_2 = new Binding
+                {
+                    Source = line_2,
+                    Path = new PropertyPath("Tag"),
+                    Mode = BindingMode.TwoWay,
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                    NotifyOnSourceUpdated = true,
+                    NotifyOnTargetUpdated = true,
+                };
 
-                Binding colorBinding = new Binding
+                line_1.SetBinding(TagProperty, tagBinding_1);
+                newWire.SetBinding(TagProperty, tagBinding_2);
+
+                Binding colorBinding_1 = new Binding
                 {
                     Source = newWire,
                     Path = new PropertyPath("Stroke"),
@@ -230,8 +281,18 @@ namespace CircuitrySimulator
                     NotifyOnTargetUpdated = true,
                 };
 
-                line_1.SetBinding(Line.StrokeProperty, colorBinding);
-                line_2.SetBinding(Polyline.StrokeProperty, colorBinding);
+                Binding colorBinding_2 = new Binding
+                {
+                    Source = line_2,
+                    Path = new PropertyPath("Stroke"),
+                    Mode = BindingMode.TwoWay,
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                    NotifyOnSourceUpdated = true,
+                    NotifyOnTargetUpdated = true,
+                };
+
+                line_1.SetBinding(Line.StrokeProperty, colorBinding_1);
+                newWire.SetBinding(Polyline.StrokeProperty, colorBinding_2);
             }
             else
             {
@@ -498,7 +559,7 @@ namespace CircuitrySimulator
                     DeleteChildObject((Polyline)sender);
                     break;
                 case "Wiring":
-                    PlaceWire(sender);
+                    PlaceWire(sender, DrawingBoard);
                     break;
                 case "Placement":
                     break;

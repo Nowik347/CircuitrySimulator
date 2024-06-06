@@ -12,13 +12,15 @@
     <None Remove="Images\Components\Edited\AND_edited.png" />
     <None Remove="Images\Components\Edited\button_edited.png" />
     <None Remove="Images\Components\Edited\diode_edited.png" />
-    <None Remove="Images\Components\Edited\ground.png" />
+    <None Remove="Images\Components\Edited\ground_edited.png" />
     <None Remove="Images\Components\Edited\inverter_edited.png" />
     <None Remove="Images\Components\Edited\NAND_edited.png" />
     <None Remove="Images\Components\Edited\NOR_edited.png" />
     <None Remove="Images\Components\Edited\OR_edited.png" />
     <None Remove="Images\Components\Edited\oscilator_edited.png" />
-    <None Remove="Images\Components\Edited\power.png" />
+    <None Remove="Images\Components\Edited\power_edited.png" />
+    <None Remove="Images\Components\Edited\subcircuitpin_edited.png" />
+    <None Remove="Images\Components\Edited\subcircuit_edited.png" />
     <None Remove="Images\Components\Edited\XOR_edited.png" />
     <None Remove="Images\Components\ground.png" />
     <None Remove="Images\Components\inverter.png" />
@@ -58,6 +60,12 @@
     <Resource Include="Images\Components\Edited\oscilator_edited.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Components\Edited\subcircuit_edited.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Components\Edited\subcircuitpin_edited.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Components\Edited\XOR_edited.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -70,7 +78,7 @@
     <Resource Include="Images\Components\AND.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Components\Edited\ground.png">
+    <Resource Include="Images\Components\Edited\ground_edited.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Components\Edited\inverter_edited.png">
@@ -85,7 +93,7 @@
     <Resource Include="Images\Components\Edited\OR_edited.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Components\Edited\power.png">
+    <Resource Include="Images\Components\Edited\power_edited.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Components\inverter.png">

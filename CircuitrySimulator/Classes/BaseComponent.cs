@@ -41,6 +41,16 @@ namespace CircuitrySimulator.Classes
         public List<Line> IOLines = new List<Line>();
         public double internalRotationAngle;
 
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+
+            Canvas parentCanvas = this.Parent as Canvas;
+
+            foreach (var item in IOLines)
+                parentCanvas.Children.Add(item);
+        }
+
         protected override void OnMouseEnter(MouseEventArgs e)
         {
             base.OnMouseEnter(e);

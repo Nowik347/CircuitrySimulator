@@ -9,7 +9,7 @@ namespace CircuitrySimulator.Classes
     {
         public Power(double rotationAngle)
         {
-            Source = new BitmapImage(new Uri("../Images/Components/Edited/power.png", UriKind.Relative));
+            Source = new BitmapImage(new Uri("../Images/Components/Edited/power_edited.png", UriKind.Relative));
             Width = 30;
             Height = 30;
             RenderTransform = new RotateTransform(rotationAngle);
@@ -21,15 +21,12 @@ namespace CircuitrySimulator.Classes
 
         protected override void OnInitialized(EventArgs e)
         {
-            base.OnInitialized(e);
-
             IOLines = CreatePins(0, 1);
-
-            foreach (var item in IOLines)
-                ((MainWindow)Application.Current.MainWindow).PlaceChildObject(item);
 
             IOLines[0].Stroke = new SolidColorBrush(Colors.Black);
             IOLines[0].Tag = false;
+
+            base.OnInitialized(e);
         }
 
         protected override void Simulate()
@@ -53,7 +50,7 @@ namespace CircuitrySimulator.Classes
     {
         public Ground(double rotationAngle)
         {
-            Source = new BitmapImage(new Uri("../Images/Components/Edited/ground.png", UriKind.Relative));
+            Source = new BitmapImage(new Uri("../Images/Components/Edited/ground_edited.png", UriKind.Relative));
             Width = 30;
             Height = 30;
             RenderTransform = new RotateTransform(rotationAngle);
@@ -64,15 +61,12 @@ namespace CircuitrySimulator.Classes
 
         protected override void OnInitialized(EventArgs e)
         {
-            base.OnInitialized(e);
-
             IOLines = CreatePins(1, 0);
-
-            foreach (var item in IOLines)
-                ((MainWindow)Application.Current.MainWindow).PlaceChildObject(item);
 
             IOLines[0].Stroke = new SolidColorBrush(Colors.Black);
             IOLines[0].Tag = false;
+
+            base.OnInitialized(e);
         }
     }
 }
