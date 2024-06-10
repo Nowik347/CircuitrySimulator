@@ -16,6 +16,7 @@ namespace CircuitrySimulator.Classes
             RenderTransformOrigin = new Point(0.5, 0.5);
             Focusable = true;
             internalRotationAngle = rotationAngle;
+            Tag = false;
         }
 
         protected override void OnInitialized(EventArgs e)

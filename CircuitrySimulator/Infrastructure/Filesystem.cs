@@ -85,6 +85,8 @@ namespace CircuitrySimulator
         private void NewFileButton_Click(object sender, RoutedEventArgs e)
         {
             DrawingBoard.Children.Clear();
+
+            ClearState();
         }
     }
 }

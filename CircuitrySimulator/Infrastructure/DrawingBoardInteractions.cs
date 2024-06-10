@@ -21,7 +21,7 @@ namespace CircuitrySimulator
             set { _rotationAngle = _rotationAngle == 270 ? 0 : value; }
         }
 
-        public string newElementName;
+        public string? newElementName;
         public BaseComponent? currentSelectedObject;
 
         private uint totalComponentCount = 0;
@@ -41,8 +41,8 @@ namespace CircuitrySimulator
                         {
                             Name = "previewImage",
                             Source = new BitmapImage(new Uri("../Images/Components/Edited/" + newElementName.ToLower() + "_edited.png", UriKind.Relative)),
-                            Width = 50,
-                            Height = 100,
+                            Width = 70,
+                            Height = 70,
                             Opacity = 0.5,
                             RenderTransform = new RotateTransform(rotationAngle),
                             RenderTransformOrigin = new Point(0.5, 0.5),
@@ -129,7 +129,6 @@ namespace CircuitrySimulator
 
             Canvas.SetLeft(newObject, x - newObject.Width / 2);
             Canvas.SetTop(newObject, y - newObject.Height / 2);
-            Canvas.SetZIndex(newObject, 2);
 
             DrawingBoard.Children.Add(newObject);
 

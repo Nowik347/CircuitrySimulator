@@ -50,13 +50,89 @@ namespace CircuitrySimulator
         {
             currentState = "Selection";
 
+            if (currentSelectedObject != null)
+            {
+                ClosePropertiesPanel();
+
+                Remove_Selection_Frame(currentSelectedObject.selectionFrame);
+
+                currentSelectedObject.selectionFrame = null;
+
+                currentSelectedObject = null;
+            }
+
             SelectionToggleButton.IsChecked = true;
 
             DeleteToggleButton.IsChecked = false;
             WiringToggleButton.IsChecked = false;
             drawPreviewImage = false;
+            newElementName = null;
 
             UpdateStatusLabel();
+        }
+
+        public void OpenPropertiesPanel()
+        {
+            PropertiesPanel.Visibility = Visibility.Visible;
+
+            switch (currentSelectedObject.GetType().ToString())
+            {
+                case "CircuitrySimulator.Classes.SubCircuit":
+                    SubCircuit subCircuit = currentSelectedObject as SubCircuit;
+
+                    NameLabel.Visibility = Visibility.Visible;
+                    NameTextbox.Visibility = Visibility.Visible;
+
+                    NameTextbox.Text = currentSelectedObject.Name;
+
+                    SizeLabel.Visibility = Visibility.Visible;
+                    SizeTextbox.Visibility = Visibility.Visible;
+
+                    SizeTextbox.Text = subCircuit.Width.ToString();
+
+                    LoadedCircuitLabel.Visibility = Visibility.Visible;
+                    LoadedCircuitTextBlock.Visibility = Visibility.Visible;
+
+                    LoadedCircuitTextBlock.Text = subCircuit.circuitFileName;
+
+                    break;
+                case "CircuitrySimulator.Classes.SubCircuitPin":
+                    SubCircuitPin subCircuitPin = currentSelectedObject as SubCircuitPin;
+
+                    NameLabel.Visibility = Visibility.Visible;
+                    NameTextbox.Visibility = Visibility.Visible;
+
+                    NameTextbox.Text = currentSelectedObject.Name;
+
+                    PinLabelLabel.Visibility = Visibility.Visible;
+                    PinLabelTextbox.Visibility = Visibility.Visible;
+
+                    PinLabelTextbox.Text = subCircuitPin.pinLabel;
+                    break;
+                default:
+                    NameLabel.Visibility = Visibility.Visible;
+                    NameTextbox.Visibility = Visibility.Visible;
+
+                    NameTextbox.Text = currentSelectedObject.Name;
+                    break;
+            }
+        }
+
+        public void ClosePropertiesPanel()
+        {
+            PropertiesPanel.Visibility = Visibility.Collapsed;
+
+            NameLabel.Visibility = Visibility.Collapsed;
+            NameTextbox.Visibility = Visibility.Collapsed;
+
+            SizeLabel.Visibility = Visibility.Collapsed;
+            SizeTextbox.Visibility = Visibility.Collapsed;
+
+            LoadedCircuitLabel.Visibility = Visibility.Collapsed;
+            LoadedCircuitTextBlock.Visibility = Visibility.Collapsed;
+
+            PinLabelLabel.Visibility = Visibility.Collapsed;
+            PinLabelTextbox.Visibility = Visibility.Collapsed;
         }
 
         public void UpdateStatusLabel()
@@ -87,7 +163,6 @@ namespace CircuitrySimulator
         public void Remove_Selection_Frame(Rectangle? selectionFrame)
         {
             DrawingBoard.Children.Remove(selectionFrame);
-            ClearState();
         }
 
         private void DeleteToggleButton_Checked(object sender, RoutedEventArgs e)
@@ -126,9 +201,43 @@ namespace CircuitrySimulator
         {
             foreach (FrameworkElement i in DrawingBoard.Children)
             {
+                //if (i.GetType().ToString() == "CircuitrySimulator.Classes.Power")
+                //    i.Tag = (bool)i.Tag == false ? true : false;
+
                 if (i.GetType().ToString() == "CircuitrySimulator.Classes.Power")
-                    i.Tag = (bool)i.Tag == false ? true : false;
+                {
+                    Power power = i as Power;
+
+                    power.Update();
+                }
             }
+        }
+
+        private void NameTextbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (currentSelectedObject != null)
+                currentSelectedObject.Name = NameTextbox.Text;
+        }
+
+        private void SizeTextbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (currentSelectedObject != null)
+                try
+                {
+                    if (int.Parse(SizeTextbox.Text) > 0)
+                        currentSelectedObject.Name = NameTextbox.Text;
+                    else
+                        SizeTextbox.Text = "1";
+                }
+                catch (System.FormatException)
+                {
+                    SizeTextbox.Text = "1";
+                }
+        }
+
+        private void PinLabelTextbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

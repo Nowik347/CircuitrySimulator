@@ -41,6 +41,8 @@ namespace CircuitrySimulator.Classes
         public List<Line> IOLines = new List<Line>();
         public double internalRotationAngle;
 
+        private List<string> previousState = new List<string>();
+
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
@@ -71,30 +73,6 @@ namespace CircuitrySimulator.Classes
             }
         }
 
-        protected override void OnGotFocus(RoutedEventArgs e)
-        {
-            base.OnGotFocus(e);
-
-            ((MainWindow)Application.Current.MainWindow).currentSelectedObject = this;
-
-            selectionFrame = ((MainWindow)Application.Current.MainWindow).Draw_Selection_Frame(this);
-
-            ((MainWindow)Application.Current.MainWindow).currentState = this.Name;
-
-            ((MainWindow)Application.Current.MainWindow).UpdateStatusLabel();
-        }
-
-        protected override void OnLostFocus(RoutedEventArgs e)
-        {
-            base.OnLostFocus(e);
-
-            ((MainWindow)Application.Current.MainWindow).currentSelectedObject = null;
-
-            ((MainWindow)Application.Current.MainWindow).Remove_Selection_Frame(selectionFrame);
-
-            selectionFrame = null;
-        }
-
         public void DeleteChildren()
         {
             foreach (UIElement i in childrenElements)
@@ -118,7 +96,22 @@ namespace CircuitrySimulator.Classes
                 case "Placement":
                     break;
                 default:
-                    Keyboard.Focus(this);
+                    if (((MainWindow)Application.Current.MainWindow).currentSelectedObject != null)
+                    {
+                        ((MainWindow)Application.Current.MainWindow).Remove_Selection_Frame(((MainWindow)Application.Current.MainWindow).currentSelectedObject.selectionFrame);
+
+                        ((MainWindow)Application.Current.MainWindow).currentSelectedObject.selectionFrame = null;
+                    }
+
+                    ((MainWindow)Application.Current.MainWindow).currentSelectedObject = this;
+
+                    ((MainWindow)Application.Current.MainWindow).OpenPropertiesPanel();
+
+                    selectionFrame = ((MainWindow)Application.Current.MainWindow).Draw_Selection_Frame(this);
+
+                    ((MainWindow)Application.Current.MainWindow).currentState = this.Name;
+
+                    ((MainWindow)Application.Current.MainWindow).UpdateStatusLabel();
                     break;
             }
         }
@@ -129,8 +122,50 @@ namespace CircuitrySimulator.Classes
         {
             base.OnPropertyChanged(e);
 
-            if (this.IsInitialized && IOLines.Count != 0)
-                Simulate();
+            if (this.IsInitialized && IOLines.Count != 0)                //Simulate();
+            {
+                if (previousState.Count == 0)
+                {
+                    foreach (Line line in IOLines)
+                        previousState.Add(line.Stroke.ToString());
+
+                    Simulate();
+                }
+                else
+                {
+                    for (int i = 0; i < IOLines.Count; i++)
+                        if (IOLines[i].Stroke.ToString() != previousState[i])
+                        {
+                            for (int j = 0; j < IOLines.Count; j++)
+                                previousState[j] = IOLines[j].Stroke.ToString();
+
+                            Simulate();
+                            break;
+                        }
+
+                    //if (IOLines.Count >= 3)
+                    //{
+                    //    if (IOLines[0].Stroke.ToString() != previousState[0] || IOLines[1].Stroke.ToString() != previousState[1])
+                    //    {
+                    //        for (int i = 0; i < IOLines.Count; i++)
+                    //            previousState[i] = IOLines[i].Stroke.ToString();
+
+                            //        Simulate();
+                            //    }
+                            //}
+                            //else
+                            //{
+                            //    if (IOLines[0].Stroke.ToString() != previousState[0])
+                            //    {
+                            //        for (int i = 0; i < IOLines.Count; i++)
+                            //            previousState[i] = IOLines[i].Stroke.ToString();
+
+                            //        Simulate();
+                            //    }
+                            //}
+                }
+            }
+
         }
     }
 }

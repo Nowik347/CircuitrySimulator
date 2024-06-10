@@ -32,9 +32,9 @@
                 <MenuItem Header="Файл...">
                     <MenuItem Name="SubCircuitButton" Header="Загрузить подсхему" Click="SetState_FromButton"/>
                 </MenuItem>
-                <MenuItem Header="Редактирование"/>
+                <!--<MenuItem Header="Редактирование"/>-->
                 <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-                <MenuItem Header="Опции"/>
+                <!--<MenuItem Header="Опции"/>-->
                 <MenuItem Header="О программе"/>
             </Menu>
 
@@ -95,7 +95,8 @@
         <!--Центральное поле-->
         <DockPanel Grid.Row="1" LastChildFill="True">
             <!--Панель элементов-->
-            <StackPanel Background="WhiteSmoke"
+            <StackPanel Name="ComponentsPanel"
+                        Background="WhiteSmoke"
                         Width="220" 
                         DockPanel.Dock="Left" 
                         Panel.ZIndex="1">
@@ -118,7 +119,7 @@
 
                         <StackPanel Margin="3" Grid.Row="0" Grid.Column="0">
                             <Button Name="TransistorButton" Click="SetState_FromButton" Height="65" VerticalContentAlignment="Center">
-                                <Image Source="../Images/Components/Edited/transistor.png" Height="50"/>
+                                <Image Source="../Images/Components/Edited/transistor_edited.png" Height="50"/>
                             </Button>
 
                             <TextBlock Text="Транзистор" 
@@ -319,27 +320,27 @@
                 </Expander>
             </StackPanel>
             
-            
-
             <!--Панель настроек-->
             <DockPanel Name="PropertiesPanel"
                        Background="WhiteSmoke"
                        DockPanel.Dock="Right"
-                       Visibility="Collapsed"
+                       Visibility="Visible"
                        Panel.ZIndex="1">
 
                 <Label Content="Свойства" DockPanel.Dock="Top"/>
 
                 <StackPanel DockPanel.Dock="Left">
-                    <Label Content="ID"/>
-                    <Label Content="Имя"/>
-                    <Label Content="Цвет"/>
+                    <Label Name="NameLabel" Content="Название"/>
+                    <Label Name="SizeLabel" Content="Размер"/>
+                    <Label Name="LoadedCircuitLabel" Content="Загруженная схема"/>
+                    <Label Name="PinLabelLabel" Content="Подпись контакта"/>
                 </StackPanel>
 
                 <StackPanel DockPanel.Dock="Right">
-                    <TextBox Margin="0 0 0 11" Width="150"></TextBox>
-                    <TextBox Margin="0 0 0 11" Width="150"></TextBox>
-                    <TextBox Margin="0 0 0 11" Width="150"></TextBox>
+                    <TextBox Name="NameTextbox" Margin="0 5 0 0" Width="150" TextChanged="NameTextbox_TextChanged"/>
+                    <TextBox Name="SizeTextbox" Margin="0 8 0 0" Width="150" TextChanged="SizeTextbox_TextChanged"/>
+                    <TextBlock Name="LoadedCircuitTextBlock" Margin="0 8 0 0" Width="150"/>
+                    <TextBox Name="PinLabelTextbox" Margin="0 8 0 0" Width="150" TextChanged="PinLabelTextbox_TextChanged"/>
                 </StackPanel>
             </DockPanel>
 
@@ -350,7 +351,7 @@
                     MouseMove="DrawingBoard_MouseMove" 
                     MouseLeftButtonDown="DrawingBoard_MouseLeftButtonDown"
                     MouseEnter="DrawingBoard_MouseEnter"
-                    MouseLeave="DrawingBoard_MouseLeave"/>
+                    MouseLeave="DrawingBoard_MouseLeave" KeyDown="Window_KeyDown"/>
         </DockPanel>
 
         <StackPanel Grid.Row="2" 

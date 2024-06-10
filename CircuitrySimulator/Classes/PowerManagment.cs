@@ -29,6 +29,11 @@ namespace CircuitrySimulator.Classes
             base.OnInitialized(e);
         }
 
+        public void Update()
+        {
+            Simulate();
+        }
+
         protected override void Simulate()
         {
             base.Simulate();
@@ -38,7 +43,7 @@ namespace CircuitrySimulator.Classes
                 IOLines[0].Stroke = new SolidColorBrush(Colors.Green);
                 IOLines[0].Tag = true;
             }
-            else 
+            else
             {
                 IOLines[0].Stroke = new SolidColorBrush(Colors.Black);
                 IOLines[0].Tag = false;
@@ -57,6 +62,7 @@ namespace CircuitrySimulator.Classes
             RenderTransformOrigin = new Point(0.5, 0.5);
             Focusable = true;
             internalRotationAngle = rotationAngle;
+            Tag = false;
         }
 
         protected override void OnInitialized(EventArgs e)

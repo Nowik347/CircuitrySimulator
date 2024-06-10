@@ -21,6 +21,8 @@
     <None Remove="Images\Components\Edited\power_edited.png" />
     <None Remove="Images\Components\Edited\subcircuitpin_edited.png" />
     <None Remove="Images\Components\Edited\subcircuit_edited.png" />
+    <None Remove="Images\Components\Edited\switch_edited.png" />
+    <None Remove="Images\Components\Edited\transistor_edited.png" />
     <None Remove="Images\Components\Edited\XOR_edited.png" />
     <None Remove="Images\Components\ground.png" />
     <None Remove="Images\Components\inverter.png" />
@@ -41,6 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\Components\Edited\switch_edited.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Components\Edited\button_edited.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -64,6 +69,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Components\Edited\subcircuitpin_edited.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Components\Edited\transistor_edited.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Components\Edited\XOR_edited.png">

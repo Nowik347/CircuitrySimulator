@@ -15,6 +15,9 @@ namespace CircuitrySimulator
                 case Key.F4:
                     PropertiesPanel.Visibility = PropertiesPanel.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
                     break;
+                case Key.F2:
+                    ComponentsPanel.Visibility = ComponentsPanel.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+                    break;
                 case Key.R:
                     rotationAngle += 90;
 
@@ -47,9 +50,9 @@ namespace CircuitrySimulator
 
             ClearState();
 
-            FocusManager.SetFocusedElement(this, null);
+            FocusManager.SetFocusedElement(this, this);
 
-            Keyboard.ClearFocus();
+            Keyboard.Focus(this);
         }
     }
 }

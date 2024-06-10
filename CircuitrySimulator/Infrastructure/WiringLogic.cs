@@ -16,7 +16,7 @@ namespace CircuitrySimulator
         public object startWire, endWire;
         public Point point_1, point_2;
 
-        public void PlaceWire(object wire, Canvas placementBoard)
+        public void PlaceWire(object wire, Canvas placementBoard, bool subcurcuit = false)
         {
             if (wire == startWire)
                 return;
@@ -29,7 +29,7 @@ namespace CircuitrySimulator
             {
                 endWire = wire;
 
-                if (newElementName != null && newElementName.ToLower() == "subcircuit")
+                if (subcurcuit)
                 {
                     if (startWire.GetType().ToString() == "System.Windows.Shapes.Polyline" && endWire.GetType().ToString() == "System.Windows.Shapes.Polyline")
                     {
@@ -166,6 +166,13 @@ namespace CircuitrySimulator
             {
                 Polyline line_1 = startWire as Polyline, line_2 = endWire as Polyline;
 
+                if (line_1.Stroke.ToString() != "#FF000000" || line_2.Stroke.ToString() != "#FF000000")
+                {
+                    newWire.Stroke = new SolidColorBrush(Colors.Green);
+                    line_1.Stroke = new SolidColorBrush(Colors.Green);
+                    line_1.Stroke = new SolidColorBrush(Colors.Green);
+                }
+
                 Binding tagBinding = new Binding
                 {
                     Source = newWire,
@@ -188,7 +195,7 @@ namespace CircuitrySimulator
                     NotifyOnSourceUpdated = true,
                     NotifyOnTargetUpdated = true,
                 };
-
+                
                 line_1.SetBinding(Polyline.StrokeProperty, colorBinding);
                 line_2.SetBinding(Polyline.StrokeProperty, colorBinding);
             }
@@ -196,6 +203,13 @@ namespace CircuitrySimulator
             {
                 Polyline line_1 = startWire as Polyline;
                 Line line_2 = endWire as Line;
+
+                if (line_1.Stroke.ToString() != "#FF000000" || line_2.Stroke.ToString() != "#FF000000")
+                {
+                    newWire.Stroke = new SolidColorBrush(Colors.Green);
+                    line_1.Stroke = new SolidColorBrush(Colors.Green);
+                    line_1.Stroke = new SolidColorBrush(Colors.Green);
+                }
 
                 Binding tagBinding_1 = new Binding
                 {
@@ -248,6 +262,13 @@ namespace CircuitrySimulator
                 Line line_1 = startWire as Line;
                 Polyline line_2 = endWire as Polyline;
 
+                if (line_1.Stroke.ToString() != "#FF000000" || line_2.Stroke.ToString() != "#FF000000")
+                {
+                    newWire.Stroke = new SolidColorBrush(Colors.Green);
+                    line_1.Stroke = new SolidColorBrush(Colors.Green);
+                    line_1.Stroke = new SolidColorBrush(Colors.Green);
+                }
+
                 Binding tagBinding_1 = new Binding
                 {
                     Source = newWire,
@@ -297,6 +318,13 @@ namespace CircuitrySimulator
             else
             {
                 Line line_1 = startWire as Line, line_2 = endWire as Line;
+
+                if (line_1.Stroke.ToString() != "#FF000000" || line_2.Stroke.ToString() != "#FF000000")
+                {
+                    newWire.Stroke = new SolidColorBrush(Colors.Green);
+                    line_1.Stroke = new SolidColorBrush(Colors.Green);
+                    line_1.Stroke = new SolidColorBrush(Colors.Green);
+                }
 
                 Binding tagBinding = new Binding
                 {

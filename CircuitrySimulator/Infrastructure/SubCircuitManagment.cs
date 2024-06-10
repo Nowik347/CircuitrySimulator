@@ -10,24 +10,32 @@ namespace CircuitrySimulator
 {
     public partial class MainWindow : Window
     {
-        public Canvas? LoadSubcircuitFromFileButton()
+        public Canvas? LoadSubcircuitFromFileButton(SubCircuit sender, string filename = null)
         {
-            // Configure save file dialog box
-            var dialog = new Microsoft.Win32.OpenFileDialog();
-            dialog.FileName = "Circuit"; // Default file name
-            dialog.DefaultExt = ".cir"; // Default file extension
-            dialog.Filter = "Circuit schemes (.cir)|*.cir"; // Filter files by extension
-
-            // Show save file dialog box
-            bool? result = dialog.ShowDialog();
-
-            // Process save file dialog box results
-            if (result == true)
+            if (filename == null)
             {
-                // Save document
-                currentFileName = dialog.FileName;
+                // Configure save file dialog box
+                var dialog = new Microsoft.Win32.OpenFileDialog();
+                dialog.FileName = "Circuit"; // Default file name
+                dialog.DefaultExt = ".cir"; // Default file extension
+                dialog.Filter = "Circuit schemes (.cir)|*.cir"; // Filter files by extension
 
-                List<SerializebleData> data = JsonConvert.DeserializeObject<List<SerializebleData>>(File.ReadAllText(currentFileName));
+                // Show save file dialog box
+                bool? result = dialog.ShowDialog();
+
+                // Process save file dialog box results
+                if (result == true)
+                {
+                    List<SerializebleData> data = JsonConvert.DeserializeObject<List<SerializebleData>>(File.ReadAllText(dialog.FileName));
+
+                    sender.circuitFileName = dialog.FileName;
+
+                    return DeserializeSubCircuitData(data);
+                }
+            }
+            else
+            {
+                List<SerializebleData> data = JsonConvert.DeserializeObject<List<SerializebleData>>(File.ReadAllText(filename));
 
                 return DeserializeSubCircuitData(data);
             }
@@ -67,8 +75,20 @@ namespace CircuitrySimulator
                         if (element_b == null)
                             break;
 
-                        PlaceWire(element_a, newCanvas);
-                        PlaceWire(element_b, newCanvas);
+                        PlaceWire(element_a, newCanvas, true);
+                        PlaceWire(element_b, newCanvas, true);
+                        break;
+                    case "CircuitrySimulator.Classes.SubCircuit":
+                        SubCircuit newSubcircuit = new SubCircuit(int.Parse(item.data[0]), item.data[2]);
+
+                        totalComponentCount++;
+
+                        newSubcircuit.Name = item.data[1];
+
+                        Canvas.SetLeft(newSubcircuit, item.position.Value.X);
+                        Canvas.SetTop(newSubcircuit, item.position.Value.Y);
+
+                        newCanvas.Children.Add(newSubcircuit);
                         break;
                     default:
                         BaseComponent? newObject = Activator.CreateInstance(Type.GetType(item.typeName), new object[] { int.Parse(item.data[0]) }) as BaseComponent;

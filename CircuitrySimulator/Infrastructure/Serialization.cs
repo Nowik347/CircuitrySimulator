@@ -49,6 +49,20 @@ namespace CircuitrySimulator
                     case "System.Windows.Shapes.Line":
                     case "System.Windows.Shapes.Ellipse":
                         break;
+                    case "CircuitrySimulator.Classes.SubCircuit":
+                        SubCircuit subcircuit = item as SubCircuit;
+
+                        SerializebleData subcircuitData = new SerializebleData();
+
+                        subcircuitData.typeName = item.GetType().ToString();
+                        subcircuitData.position = new Point(Canvas.GetLeft(subcircuit), Canvas.GetTop(subcircuit));
+                        subcircuitData.data.Add(subcircuit.internalRotationAngle.ToString());
+                        subcircuitData.data.Add(subcircuit.Name);
+                        subcircuitData.data.Add(subcircuit.circuitFileName);
+
+                        circuitData.Add(subcircuitData);
+
+                        break;
                     case "System.Windows.Shapes.Polyline":
                         Polyline polyline = item as Polyline;
 
@@ -126,6 +140,18 @@ namespace CircuitrySimulator
 
                         PlaceWire(element_a, DrawingBoard);
                         PlaceWire(element_b, DrawingBoard);
+                        break;
+                    case "CircuitrySimulator.Classes.SubCircuit":
+                        SubCircuit newSubcircuit = new SubCircuit(int.Parse(item.data[0]), item.data[2]);
+
+                        totalComponentCount++;
+
+                        newSubcircuit.Name = item.data[1];
+
+                        Canvas.SetLeft(newSubcircuit, item.position.Value.X);
+                        Canvas.SetTop(newSubcircuit, item.position.Value.Y);
+
+                        DrawingBoard.Children.Add(newSubcircuit);
                         break;
                     default:
                         BaseComponent? newObject = Activator.CreateInstance(Type.GetType(item.typeName), new object[] { int.Parse(item.data[0]) }) as BaseComponent;
