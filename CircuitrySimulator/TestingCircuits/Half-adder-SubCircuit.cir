@@ -17,49 +17,41 @@
   },
   {
     "typeName": "CircuitrySimulator.Classes.SubCircuitPin",
-    "position": "770,321",
-    "data": [
-      "180",
-      "SubCircuitPin_4dPAK8FJn"
-    ]
-  },
-  {
-    "typeName": "CircuitrySimulator.Classes.SubCircuitPin",
-    "position": "761,421",
-    "data": [
-      "180",
-      "SubCircuitPin_7s2m3CIyM"
-    ]
-  },
-  {
-    "typeName": "CircuitrySimulator.Classes.SubCircuitPin",
-    "position": "390,307",
+    "position": "392,309",
     "data": [
       "0",
-      "SubCircuitPin_uyvqYCB1A"
+      "SubCircuitPin_LWJ0TIP9Z"
     ]
   },
   {
     "typeName": "CircuitrySimulator.Classes.SubCircuitPin",
-    "position": "390,345",
+    "position": "392,338",
     "data": [
       "0",
-      "SubCircuitPin_Bv8VzHNIT"
+      "SubCircuitPin_Cx8lIdenE"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.SubCircuitPin",
+    "position": "731,324",
+    "data": [
+      "180",
+      "SubCircuitPin_k6JjH7CXx"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.SubCircuitPin",
+    "position": "706,420",
+    "data": [
+      "180",
+      "SubCircuitPin_JSRYmWoDw"
     ]
   },
   {
     "typeName": "System.Windows.Shapes.Polyline",
     "position": null,
     "data": [
-      "AND_wrMok2OBc_input1",
-      "SubCircuitPin_Bv8VzHNIT_output1"
-    ]
-  },
-  {
-    "typeName": "System.Windows.Shapes.Polyline",
-    "position": null,
-    "data": [
-      "SubCircuitPin_uyvqYCB1A_output1",
+      "SubCircuitPin_LWJ0TIP9Z_output1",
       "XOR_SPG9E8tAf_input2"
     ]
   },
@@ -67,16 +59,24 @@
     "typeName": "System.Windows.Shapes.Polyline",
     "position": null,
     "data": [
-      "AND_wrMok2OBc_input2",
-      "SubCircuitPin_uyvqYCB1A_output1ФXOR_SPG9E8tAf_input2"
+      "AND_wrMok2OBc_input1",
+      "SubCircuitPin_Cx8lIdenE_output1"
     ]
   },
   {
     "typeName": "System.Windows.Shapes.Polyline",
     "position": null,
     "data": [
-      "AND_wrMok2OBc_input1ФSubCircuitPin_Bv8VzHNIT_output1",
-      "XOR_SPG9E8tAf_input1"
+      "AND_wrMok2OBc_input2",
+      "SubCircuitPin_LWJ0TIP9Z_output1ФXOR_SPG9E8tAf_input2"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "XOR_SPG9E8tAf_input1",
+      "AND_wrMok2OBc_input1ФSubCircuitPin_Cx8lIdenE_output1"
     ]
   },
   {
@@ -84,7 +84,7 @@
     "position": null,
     "data": [
       "XOR_SPG9E8tAf_output1",
-      "SubCircuitPin_4dPAK8FJn_output1"
+      "SubCircuitPin_k6JjH7CXx_output1"
     ]
   },
   {
@@ -92,7 +92,7 @@
     "position": null,
     "data": [
       "AND_wrMok2OBc_output1",
-      "SubCircuitPin_7s2m3CIyM_output1"
+      "SubCircuitPin_JSRYmWoDw_output1"
     ]
   }
 ]

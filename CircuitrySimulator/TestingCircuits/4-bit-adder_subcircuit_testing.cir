@@ -1,0 +1,299 @@
+[
+  {
+    "typeName": "CircuitrySimulator.Classes.SubCircuit",
+    "position": "683,336",
+    "data": [
+      "0",
+      "SubCircuit_kLcCNe1MU",
+      "4-bit-adder_subcircuit.cir"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Diode",
+    "position": "963,315",
+    "data": [
+      "0",
+      "Diode_MJTPsbtwv"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Diode",
+    "position": "963,367",
+    "data": [
+      "0",
+      "Diode_gG6kYKi9q"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Diode",
+    "position": "963,419",
+    "data": [
+      "0",
+      "Diode_VLhWeAN4R"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Diode",
+    "position": "964,471",
+    "data": [
+      "0",
+      "Diode_eNZKLSqEu"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Diode",
+    "position": "793,616",
+    "data": [
+      "90",
+      "Diode_hT90eMk2f"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuit_kLcCNe1MU_output5",
+      "Diode_MJTPsbtwv_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuit_kLcCNe1MU_output4",
+      "Diode_gG6kYKi9q_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuit_kLcCNe1MU_output1",
+      "Diode_hT90eMk2f_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Diode_eNZKLSqEu_input1",
+      "SubCircuit_kLcCNe1MU_output2"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Switch",
+    "position": "217,195",
+    "data": [
+      "90",
+      "Switch_WblrMDgJ3"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Switch",
+    "position": "264,195",
+    "data": [
+      "90",
+      "Switch_1DRcnE2h3"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Switch",
+    "position": "312,195",
+    "data": [
+      "90",
+      "Switch_UOyXqbYEB"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Switch",
+    "position": "360,195",
+    "data": [
+      "90",
+      "Switch_pAQrvJPIj"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Power",
+    "position": "40,131",
+    "data": [
+      "0",
+      "Power_9W3S5XlG2"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Power",
+    "position": "47,674",
+    "data": [
+      "0",
+      "Power_yb4gmNdix"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Power_9W3S5XlG2_output1",
+      "Switch_pAQrvJPIj_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Switch_WblrMDgJ3_input1",
+      "Power_9W3S5XlG2_output1ФSwitch_pAQrvJPIj_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Switch_1DRcnE2h3_input1",
+      "Power_9W3S5XlG2_output1ФSwitch_pAQrvJPIj_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Switch_UOyXqbYEB_input1",
+      "Power_9W3S5XlG2_output1ФSwitch_pAQrvJPIj_input1"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Switch",
+    "position": "209,569",
+    "data": [
+      "270",
+      "Switch_2zGQiCrTy"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Switch",
+    "position": "258,569",
+    "data": [
+      "270",
+      "Switch_N5TfnOzpU"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Switch",
+    "position": "307,569",
+    "data": [
+      "270",
+      "Switch_Jva2GKn7z"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Switch",
+    "position": "356,569",
+    "data": [
+      "270",
+      "Switch_SJyFdjbAX"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Power_yb4gmNdix_output1",
+      "Switch_SJyFdjbAX_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Power_yb4gmNdix_output1ФSwitch_SJyFdjbAX_input1",
+      "Switch_Jva2GKn7z_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Power_yb4gmNdix_output1ФSwitch_SJyFdjbAX_input1",
+      "Switch_N5TfnOzpU_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Power_yb4gmNdix_output1ФSwitch_SJyFdjbAX_input1",
+      "Switch_2zGQiCrTy_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuit_kLcCNe1MU_input8",
+      "Switch_WblrMDgJ3_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuit_kLcCNe1MU_input7",
+      "Switch_2zGQiCrTy_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuit_kLcCNe1MU_input6",
+      "Switch_1DRcnE2h3_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuit_kLcCNe1MU_input5",
+      "Switch_N5TfnOzpU_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuit_kLcCNe1MU_input4",
+      "Switch_UOyXqbYEB_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuit_kLcCNe1MU_input3",
+      "Switch_Jva2GKn7z_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuit_kLcCNe1MU_input2",
+      "Switch_pAQrvJPIj_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuit_kLcCNe1MU_input1",
+      "Switch_SJyFdjbAX_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "SubCircuit_kLcCNe1MU_output3",
+      "Diode_VLhWeAN4R_input1"
+    ]
+  }
+]

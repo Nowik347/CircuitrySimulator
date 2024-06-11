@@ -1,0 +1,138 @@
+[
+  {
+    "typeName": "CircuitrySimulator.Classes.Power",
+    "position": "228,296",
+    "data": [
+      "90",
+      "Power_zbr8sdJaF"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Inverter",
+    "position": "470,428",
+    "data": [
+      "0",
+      "Inverter_902V7tuUJ"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.AND",
+    "position": "639,387",
+    "data": [
+      "0",
+      "AND_Pus8ol0nU"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.OR",
+    "position": "483,355",
+    "data": [
+      "0",
+      "OR_x6eKwYS7D"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Diode",
+    "position": "877,385",
+    "data": [
+      "0",
+      "Diode_kAGwHdzeE"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Inverter_902V7tuUJ_output1",
+      "AND_Pus8ol0nU_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "OR_x6eKwYS7D_output1",
+      "AND_Pus8ol0nU_input2"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Ground",
+    "position": "556,239",
+    "data": [
+      "270",
+      "Ground_TFIw6dOQJ"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "AND_Pus8ol0nU_output1",
+      "Diode_kAGwHdzeE_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "AND_Pus8ol0nU_output1ФDiode_kAGwHdzeE_input1",
+      "Ground_TFIw6dOQJ_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "OR_x6eKwYS7D_input2",
+      "AND_Pus8ol0nU_output1ФDiode_kAGwHdzeE_input1"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Button",
+    "position": "302,368",
+    "data": [
+      "0",
+      "Button_B7DMnKOvX"
+    ]
+  },
+  {
+    "typeName": "CircuitrySimulator.Classes.Button",
+    "position": "302,425",
+    "data": [
+      "0",
+      "Button_3c5FGHz82"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Button_3c5FGHz82_input1",
+      "Power_zbr8sdJaF_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Button_B7DMnKOvX_input1",
+      "Button_3c5FGHz82_input1ФPower_zbr8sdJaF_output1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Button_B7DMnKOvX_output1",
+      "OR_x6eKwYS7D_input1"
+    ]
+  },
+  {
+    "typeName": "System.Windows.Shapes.Polyline",
+    "position": null,
+    "data": [
+      "Button_3c5FGHz82_output1",
+      "Inverter_902V7tuUJ_input1"
+    ]
+  }
+]

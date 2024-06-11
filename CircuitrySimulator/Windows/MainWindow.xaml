@@ -12,7 +12,8 @@
         Width="1920" 
         Height="1080"
         
-        WindowState="Maximized" 
+        WindowState="Maximized"
+        Icon="../Images/Components/transistor.png"
         
         KeyDown="Window_KeyDown" 
         MouseRightButtonDown="Window_MouseRightButtonDown">
@@ -324,7 +325,7 @@
             <DockPanel Name="PropertiesPanel"
                        Background="WhiteSmoke"
                        DockPanel.Dock="Right"
-                       Visibility="Visible"
+                       Visibility="Collapsed"
                        Panel.ZIndex="1">
 
                 <Label Content="Свойства" DockPanel.Dock="Top"/>
